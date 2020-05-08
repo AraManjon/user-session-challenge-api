@@ -1,5 +1,6 @@
 package com.kubikdata.services;
 
 public interface TokenGenerator {
-  String generate(String parameter);
+  String code(String parameter);
+  String decode(String token);
 }

@@ -29,7 +29,7 @@ public class UserSessionServiceShould {
     UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator);
     String token = "randomUserToken";
     String username = "username";
-    when(tokenUsernameGenerator.generate(username)).thenReturn(token);
+    when(tokenUsernameGenerator.code(username)).thenReturn(token);
 
     Assert.assertEquals(token, userSessionService.addSession(username));
   }

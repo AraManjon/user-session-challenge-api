@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab951fdb-253f-4485-bfb6-5595ae108c40" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/domain/UserSessionServiceShould.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/services/TokenUsernameGeneratorShould.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/controllers/UserSessionControllerShould.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/controllers/UserSessionControllerShould.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +32,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -41,7 +41,7 @@
       <recent name="controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.UserSessionServiceShould">
+  <component name="RunManager" selected="JUnit.TokenUsernameGeneratorShould">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.kubikdata.Application" />
       <module name="challenge" />
@@ -51,6 +51,21 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TokenUsernameGeneratorShould" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="challenge" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="services" />
+      <option name="MAIN_CLASS_NAME" value="services.TokenUsernameGeneratorShould" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,9 +114,11 @@
       <item itemvalue="Application.Application" />
       <item itemvalue="JUnit.UserSessionControllerShould" />
       <item itemvalue="JUnit.UserSessionServiceShould" />
+      <item itemvalue="JUnit.TokenUsernameGeneratorShould" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TokenUsernameGeneratorShould" />
         <item itemvalue="JUnit.UserSessionServiceShould" />
         <item itemvalue="JUnit.UserSessionControllerShould" />
         <item itemvalue="Application.Application" />
@@ -142,21 +159,25 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="275" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1588969005923" />
-    <state width="1388" height="235" key="GridCell.Tab.0.bottom" timestamp="1588971366089">
+    <state width="1388" height="165" key="GridCell.Tab.0.bottom" timestamp="1588972052242">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1388" height="235" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1588971366089" />
-    <state width="1388" height="235" key="GridCell.Tab.0.center" timestamp="1588971366084">
+    <state width="1388" height="165" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1588972052242" />
+    <state width="1388" height="165" key="GridCell.Tab.0.center" timestamp="1588972052240">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1388" height="235" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1588971366084" />
-    <state width="1388" height="235" key="GridCell.Tab.0.left" timestamp="1588971366082">
+    <state width="1388" height="165" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1588972052240" />
+    <state width="1388" height="165" key="GridCell.Tab.0.left" timestamp="1588972052239">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1388" height="235" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1588971366082" />
-    <state width="1388" height="235" key="GridCell.Tab.0.right" timestamp="1588971366086">
+    <state width="1388" height="165" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1588972052239" />
+    <state width="1388" height="165" key="GridCell.Tab.0.right" timestamp="1588972052241">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1388" height="235" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1588971366086" />
+    <state width="1388" height="165" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1588972052241" />
+    <state x="80" y="23" width="1280" height="877" key="SettingsEditor" timestamp="1588971539752">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="80" y="23" width="1280" height="877" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1588971539752" />
   </component>
 </project>

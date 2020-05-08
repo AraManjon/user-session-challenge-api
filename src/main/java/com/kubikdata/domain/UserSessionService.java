@@ -13,7 +13,7 @@ public class UserSessionService {
   }
 
   public String createToken(String username) {
-    return tokenGenerator.generate(username);
+    return tokenGenerator.code(username);
   }
 
   public String addSession(String username) {

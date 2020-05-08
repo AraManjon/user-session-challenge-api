@@ -31,7 +31,7 @@ public class UserSessionControllerShould {
   }
 
   @Test
-  public void create_a_token_by_username_correctly(){
+  public void add_a_session_correctly(){
 
     String tokenExpected = "thisIsAToken";
     String username = "username";

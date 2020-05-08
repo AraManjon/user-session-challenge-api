@@ -1,6 +1,8 @@
 package com.kubikdata.services;
 
+import io.jsonwebtoken.Claims;
+
 public interface TokenGenerator {
   String code(String parameter);
-  String decode(String token);
+  Claims decode(String token);
 }

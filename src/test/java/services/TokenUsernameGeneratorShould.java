@@ -1,6 +1,7 @@
 package services;
 
 import com.kubikdata.services.TokenUsernameGenerator;
+import io.jsonwebtoken.Claims;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,8 +12,10 @@ public class TokenUsernameGeneratorShould {
 
     String username = "username";
     TokenUsernameGenerator tokenUsernameGenerator = new TokenUsernameGenerator();
-    String token = tokenUsernameGenerator.code(username);
 
-    Assert.assertEquals(username, tokenUsernameGenerator.decode(token));
+    String token = tokenUsernameGenerator.code(username);
+    String decodeToken = tokenUsernameGenerator.decode(token).getSubject();
+
+    Assert.assertEquals(username, decodeToken);
   }
 }

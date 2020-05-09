@@ -1,11 +1,9 @@
 package com.kubikdata.services;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
-
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Date;
@@ -22,16 +20,14 @@ public class TokenUsernameGenerator implements TokenGenerator {
     SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
     Key signingKey = new SecretKeySpec(secretKey.getBytes(), signatureAlgorithm.getJcaName());
 
-    JwtBuilder builder = Jwts.builder()
+    return Jwts.builder()
         .setIssuedAt(currentDate)
         .setSubject(username)
-        .signWith(signingKey);
-
-    return builder.compact();
+        .signWith(signingKey)
+        .compact();
   }
 
   public Claims decode(String username) {
-
     return Jwts.parser()
         .setSigningKey(this.secretKey.getBytes())
         .parseClaimsJws(username)

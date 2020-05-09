@@ -1,7 +1,6 @@
 package services;
 
 import com.kubikdata.services.TokenUsernameGenerator;
-import io.jsonwebtoken.Claims;
 import org.junit.Assert;
 import org.junit.Test;
 

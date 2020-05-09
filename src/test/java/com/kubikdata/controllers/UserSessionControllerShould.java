@@ -1,4 +1,4 @@
-package controllers;
+package com.kubikdata.controllers;
 
 import com.kubikdata.controller.UserSessionController;
 import com.kubikdata.controller.request.UserSessionRequest;

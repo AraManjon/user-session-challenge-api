@@ -1,0 +1,22 @@
+stages:
+  - build
+  - test
+default:
+  image: ruby:2.6
+
+build challenge:
+  image: maven:3-jdk-8
+  stage: build
+  tags:
+    - docker
+  script: "mvn package -B"
+  artifacts:
+    paths:
+      - target/*.jar
+
+unit_test:
+  image: maven:3-jdk-8
+  stage: test
+  tags:
+    - docker
+  script: "mvn clean test"

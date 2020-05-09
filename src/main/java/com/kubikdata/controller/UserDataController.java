@@ -6,13 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 /**
  * this class is used to return data info based on its session token,
  * choose one of the endpoints to return data info
  */
+
 @RestController
 public class UserDataController {
 

@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
+
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Date;
@@ -27,6 +28,7 @@ public class TokenUsernameGenerator implements TokenGenerator {
         .compact();
   }
 
+  @Override
   public Claims decode(String username) {
     return Jwts.parser()
         .setSigningKey(this.secretKey.getBytes())

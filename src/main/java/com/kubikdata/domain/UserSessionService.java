@@ -1,5 +1,6 @@
 package com.kubikdata.domain;
 
+import com.kubikdata.controller.response.UserSessionResponse;
 import com.kubikdata.services.TokenGenerator;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,7 @@ public class UserSessionService {
     this.tokenGenerator = tokenGenerator;
   }
 
-  public String createToken(String username) {
-    return tokenGenerator.code(username);
-  }
-
-  public String addSession(String username) {
-    return createToken(username);
+  public UserSessionResponse addSession(Username username) {
+    return new UserSessionResponse(tokenGenerator.code(username.get()));
   }
 }

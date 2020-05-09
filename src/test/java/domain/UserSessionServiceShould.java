@@ -1,6 +1,8 @@
 package domain;
 
+import com.kubikdata.controller.response.UserSessionResponse;
 import com.kubikdata.domain.UserSessionService;
+import com.kubikdata.domain.Username;
 import com.kubikdata.services.TokenUsernameGenerator;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,6 +33,6 @@ public class UserSessionServiceShould {
     String username = "username";
     when(tokenUsernameGenerator.code(username)).thenReturn(token);
 
-    Assert.assertEquals(token, userSessionService.addSession(username));
+    Assert.assertEquals(new UserSessionResponse(token), userSessionService.addSession(new Username(username)));
   }
 }

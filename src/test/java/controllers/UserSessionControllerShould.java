@@ -2,6 +2,7 @@ package controllers;
 
 import com.kubikdata.controller.UserSessionController;
 import com.kubikdata.controller.request.UserSessionRequest;
+import com.kubikdata.controller.response.UserSessionResponse;
 import com.kubikdata.services.TokenUsernameGenerator;
 import org.junit.Assert;
 import org.junit.Before;
@@ -38,11 +39,12 @@ public class UserSessionControllerShould {
     UserSessionRequest userSessionRequest = new UserSessionRequest();
     userSessionRequest.setUsername(username);
     when(tokenUsernameGenerator.code(username)).thenReturn("thisIsAToken");
+    UserSessionResponse userSessionResponseExpected = new UserSessionResponse(tokenExpected);
 
-    ResponseEntity<String> userSessionResponse = userSessionController.addSession(userSessionRequest);
+    ResponseEntity<UserSessionResponse> response = userSessionController.addSession(userSessionRequest);
 
-    Assert.assertNotNull(userSessionResponse);
-    Assert.assertEquals(HttpStatus.OK, userSessionResponse.getStatusCode());
-    Assert.assertEquals(tokenExpected, userSessionResponse.getBody());
+    Assert.assertNotNull(response);
+    Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    Assert.assertEquals(userSessionResponseExpected, response.getBody());
   }
 }

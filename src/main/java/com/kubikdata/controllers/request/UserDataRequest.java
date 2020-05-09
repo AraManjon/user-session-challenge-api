@@ -1,4 +1,4 @@
-package com.kubikdata.controller.request;
+package com.kubikdata.controllers.request;
 
 public class UserDataRequest {
 

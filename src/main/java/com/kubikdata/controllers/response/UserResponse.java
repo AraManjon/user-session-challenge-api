@@ -1,4 +1,4 @@
-package com.kubikdata.controller.response;
+package com.kubikdata.controllers.response;
 
 import java.util.Date;
 

@@ -1,8 +1,8 @@
 package com.kubikdata.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kubikdata.controller.request.UserSessionRequest;
-import com.kubikdata.controller.response.UserSessionResponse;
+import com.kubikdata.controllers.request.UserSessionRequest;
+import com.kubikdata.controllers.response.UserSessionResponse;
 import com.kubikdata.services.TokenGenerator;
 import com.kubikdata.services.TokenUsernameGenerator;
 import org.junit.Test;

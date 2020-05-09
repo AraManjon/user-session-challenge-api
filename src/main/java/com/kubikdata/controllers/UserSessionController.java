@@ -1,10 +1,9 @@
-package com.kubikdata.controller;
+package com.kubikdata.controllers;
 
-import com.kubikdata.controller.request.UserSessionRequest;
-import com.kubikdata.controller.response.UserSessionResponse;
+import com.kubikdata.controllers.request.UserSessionRequest;
+import com.kubikdata.controllers.response.UserSessionResponse;
 import com.kubikdata.domain.Username;
 import com.kubikdata.services.TokenGenerator;
-import com.kubikdata.services.TokenUsernameGenerator;
 import com.kubikdata.domain.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,20 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
  * this endpoint is needed to add a session id to a specific username
  *
  * @param userSessionRequest
- * @return token
+ * @return userSessionResponse
  */
 
 @RestController
 public class UserSessionController {
 
   @Autowired
-  TokenGenerator tokenUsernameGenerator = new TokenUsernameGenerator();
+  TokenGenerator tokenUsernameGenerator;
 
   @PostMapping(value = "/session")
   public ResponseEntity<UserSessionResponse> addSession(@RequestBody UserSessionRequest userSessionRequest) {
 
     UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator);
+    Username username = new Username(userSessionRequest.getUsername());
 
-    return new ResponseEntity<>(userSessionService.addSession(new Username(userSessionRequest.getUsername())), HttpStatus.OK);
+    return new ResponseEntity<>(userSessionService.addSession(username), HttpStatus.OK);
   }
 }

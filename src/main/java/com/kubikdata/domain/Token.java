@@ -1,9 +1,13 @@
 package com.kubikdata.domain;
 
 public class Token {
-  private String token;
+  private final String token;
 
   public Token(String token) {
     this.token = token;
+  }
+
+  public String getToken() {
+    return token;
   }
 }

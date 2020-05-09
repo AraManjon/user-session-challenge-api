@@ -1,16 +1,13 @@
 package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.response.UserResponse;
-import com.kubikdata.domain.Token;
-import com.kubikdata.domain.UserSession;
-import com.kubikdata.domain.Username;
-import com.kubikdata.infrastructure.UserSessionInMemoryRepository;
+import com.kubikdata.domain.DTO;
+import com.kubikdata.infrastructure.SessionInMemoryRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
@@ -18,13 +15,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
 
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 public class UserDataControllerShould {
-
-  @Mock
-  UserSessionInMemoryRepository userSessionInMemoryRepository;
 
   @InjectMocks
   private UserDataController userDataController;
@@ -34,6 +26,12 @@ public class UserDataControllerShould {
     MockitoAnnotations.initMocks(this);
   }
 
+  public void createDummyRepository(DTO.UserSession userSessionDTO){
+    SessionInMemoryRepository sessionInMemoryRepository = new SessionInMemoryRepository();
+    sessionInMemoryRepository.addUser(userSessionDTO);
+    userDataController.userSessionInMemoryRepository = sessionInMemoryRepository;
+  }
+
   @Test
   public void get_user_info_correctly() {
 
@@ -41,8 +39,12 @@ public class UserDataControllerShould {
     String token = "thisIsAToken";
     Date date = new Date();
     UserResponse userResponseExpected = new UserResponse(username, token, date);
+    DTO.UserSession userSessionDTO = new DTO.UserSession();
+    userSessionDTO.username = username;
+    userSessionDTO.token = token;
+    userSessionDTO.date = date;
+    createDummyRepository(userSessionDTO);
 
-    when(userSessionInMemoryRepository.findUser(new Username(username), new Token(token))).thenReturn(userResponseExpected);
     ResponseEntity<UserResponse> response = userDataController.userInfoGet(username, token);
 
     Assert.assertNotNull(response);

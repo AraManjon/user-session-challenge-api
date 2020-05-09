@@ -16,7 +16,7 @@ public class UserSessionService {
   public UserSessionResponse addSession(Username username) {
 
     UserSessionResponse userSessionResponse = new UserSessionResponse();
-    userSessionResponse.setToken(tokenGenerator.code(username.get()));
+    userSessionResponse.setToken(tokenGenerator.code(username.getUsername()));
     return userSessionResponse;
   }
 }

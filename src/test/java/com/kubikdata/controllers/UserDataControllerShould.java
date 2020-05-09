@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,8 @@ import java.util.Date;
 @ExtendWith(MockitoExtension.class)
 public class UserDataControllerShould {
 
-  Repository sessionInMemoryRepository = new SessionInMemoryRepository();
+  @Mock
+  Repository sessionInMemoryRepository;
 
   @InjectMocks
   private UserDataController userDataController;
@@ -30,6 +32,7 @@ public class UserDataControllerShould {
   }
 
   public void createDummyRepository(DTO.UserSession userSessionDTO){
+    sessionInMemoryRepository = new SessionInMemoryRepository();
     sessionInMemoryRepository.addUser(userSessionDTO);
     userDataController.sessionInMemoryRepository = sessionInMemoryRepository;
   }

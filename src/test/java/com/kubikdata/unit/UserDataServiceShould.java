@@ -1,7 +1,7 @@
-package com.kubikdata.domain;
+package com.kubikdata.unit;
 
-import com.kubikdata.controllers.UserDataController;
 import com.kubikdata.controllers.response.UserResponse;
+import com.kubikdata.domain.UserDataService;
 import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.domain.entities.Token;
 import com.kubikdata.domain.entities.Username;
@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -19,7 +20,8 @@ import java.util.Date;
 @ExtendWith(MockitoExtension.class)
 public class UserDataServiceShould {
 
-  Repository sessionInMemoryRepository = new SessionInMemoryRepository();
+  @Mock
+  Repository sessionInMemoryRepository;
 
   @Before
   public void setup() {
@@ -27,6 +29,7 @@ public class UserDataServiceShould {
   }
 
   public void createDummyRepository(DTO.UserSession userSessionDTO){
+    sessionInMemoryRepository = new SessionInMemoryRepository();
     sessionInMemoryRepository.addUser(userSessionDTO);
   }
 

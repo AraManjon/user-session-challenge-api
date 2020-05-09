@@ -1,5 +1,6 @@
-package com.kubikdata.services;
+package com.kubikdata.unit;
 
+import com.kubikdata.services.TokenUsernameGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 

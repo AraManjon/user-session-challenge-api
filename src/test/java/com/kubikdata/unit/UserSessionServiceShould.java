@@ -1,6 +1,7 @@
-package com.kubikdata.domain;
+package com.kubikdata.unit;
 
 import com.kubikdata.controllers.response.UserSessionResponse;
+import com.kubikdata.domain.UserSessionService;
 import com.kubikdata.domain.entities.Username;
 import com.kubikdata.services.TokenUsernameGenerator;
 import org.junit.Assert;

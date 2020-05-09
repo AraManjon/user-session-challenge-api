@@ -1,4 +1,4 @@
-package com.kubikdata.controllers;
+package com.kubikdata.endtoend;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kubikdata.controllers.request.UserSessionRequest;

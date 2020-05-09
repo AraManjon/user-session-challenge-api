@@ -38,8 +38,9 @@ public class UserSessionControllerShould {
     String username = "username";
     UserSessionRequest userSessionRequest = new UserSessionRequest();
     userSessionRequest.setUsername(username);
+    UserSessionResponse userSessionResponseExpected = new UserSessionResponse();
+    userSessionResponseExpected.setToken(tokenExpected);
     when(tokenUsernameGenerator.code(username)).thenReturn("thisIsAToken");
-    UserSessionResponse userSessionResponseExpected = new UserSessionResponse(tokenExpected);
 
     ResponseEntity<UserSessionResponse> response = userSessionController.addSession(userSessionRequest);
 

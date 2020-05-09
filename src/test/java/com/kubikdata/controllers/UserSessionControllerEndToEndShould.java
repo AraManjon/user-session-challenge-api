@@ -2,6 +2,8 @@ package com.kubikdata.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kubikdata.controller.request.UserSessionRequest;
+import com.kubikdata.controller.response.UserSessionResponse;
+import com.kubikdata.services.TokenGenerator;
 import com.kubikdata.services.TokenUsernameGenerator;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.Random;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,13 +34,15 @@ public class UserSessionControllerEndToEndShould {
   private ObjectMapper objectMapper;
 
   @Autowired
-  private TokenUsernameGenerator tokenUsernameGenerator;
+  private TokenGenerator tokenUsernameGenerator;
 
   @Test
   public void create_a_token_when_add_a_session_correctly() throws Exception {
 
+    String username = new Random().toString();
     UserSessionRequest userSessionRequest = new UserSessionRequest();
-    userSessionRequest.setUsername("username");
+    userSessionRequest.setUsername(username);
+    TokenUsernameGenerator generator = new TokenUsernameGenerator();
     String jsonRequest = new ObjectMapper().writeValueAsString(userSessionRequest);
 
     MvcResult result = this.mockMvc.perform(post("/session").contentType(MediaType.APPLICATION_JSON)
@@ -44,7 +50,8 @@ public class UserSessionControllerEndToEndShould {
         .andReturn();
 
     String resultAsString = result.getResponse().getContentAsString();
-
-    Assertions.assertEquals("", resultAsString);
+    UserSessionResponse sessionResponse = objectMapper.readValue(resultAsString, UserSessionResponse.class);
+    Assertions.assertNotNull(resultAsString);
+    Assertions.assertEquals(username, generator.decode(sessionResponse.getToken()).getSubject());
   }
 }

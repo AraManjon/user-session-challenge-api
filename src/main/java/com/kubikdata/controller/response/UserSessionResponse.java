@@ -3,14 +3,14 @@ package com.kubikdata.controller.response;
 import java.util.Objects;
 
 public class UserSessionResponse {
-  private final String token;
-
-  public UserSessionResponse(String token) {
-    this.token = token;
-  }
+  private String token;
 
   public String getToken() {
     return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
   }
 
   @Override

@@ -11,6 +11,4 @@ public class UserSessionRequest {
     }
 
     private String username;
-
-
 }

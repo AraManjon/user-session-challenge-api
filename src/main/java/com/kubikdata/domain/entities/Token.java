@@ -1,4 +1,4 @@
-package com.kubikdata.domain;
+package com.kubikdata.domain.entities;
 
 public class Token {
   private final String token;

@@ -1,6 +1,7 @@
 package com.kubikdata.domain;
 
 import com.kubikdata.controllers.response.UserSessionResponse;
+import com.kubikdata.domain.entities.Username;
 import com.kubikdata.services.TokenGenerator;
 import org.springframework.stereotype.Service;
 

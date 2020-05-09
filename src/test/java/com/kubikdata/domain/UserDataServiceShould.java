@@ -1,28 +1,25 @@
-package com.kubikdata.controllers;
+package com.kubikdata.domain;
 
+import com.kubikdata.controllers.UserDataController;
 import com.kubikdata.controllers.response.UserResponse;
 import com.kubikdata.domain.entities.DTO;
+import com.kubikdata.domain.entities.Token;
+import com.kubikdata.domain.entities.Username;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.infrastructure.SessionInMemoryRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
 
 @ExtendWith(MockitoExtension.class)
-public class UserDataControllerShould {
+public class UserDataServiceShould {
 
   Repository sessionInMemoryRepository = new SessionInMemoryRepository();
-
-  @InjectMocks
-  private UserDataController userDataController;
 
   @Before
   public void setup() {
@@ -31,11 +28,10 @@ public class UserDataControllerShould {
 
   public void createDummyRepository(DTO.UserSession userSessionDTO){
     sessionInMemoryRepository.addUser(userSessionDTO);
-    userDataController.sessionInMemoryRepository = sessionInMemoryRepository;
   }
 
   @Test
-  public void get_user_info_correctly() {
+  public void find_user_data_correctly() {
 
     String username = "username";
     String token = "thisIsAToken";
@@ -46,11 +42,8 @@ public class UserDataControllerShould {
     userSessionDTO.token = token;
     userSessionDTO.date = date;
     createDummyRepository(userSessionDTO);
+    UserDataService userDataService = new UserDataService(sessionInMemoryRepository);
 
-    ResponseEntity<UserResponse> response = userDataController.userInfoGet(username, token);
-
-    Assert.assertNotNull(response);
-    Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-    Assert.assertEquals(userResponseExpected, response.getBody());
+    Assert.assertEquals(userResponseExpected, userDataService.findUser(new Username(username), new Token(token)));
   }
 }

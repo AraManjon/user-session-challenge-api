@@ -2,7 +2,7 @@ package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.request.UserSessionRequest;
 import com.kubikdata.controllers.response.UserSessionResponse;
-import com.kubikdata.domain.Username;
+import com.kubikdata.domain.entities.Username;
 import com.kubikdata.services.TokenGenerator;
 import com.kubikdata.domain.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;

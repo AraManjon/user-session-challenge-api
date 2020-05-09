@@ -2,6 +2,7 @@ package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.request.UserSessionRequest;
 import com.kubikdata.controllers.response.UserSessionResponse;
+import com.kubikdata.services.TokenGenerator;
 import com.kubikdata.services.TokenUsernameGenerator;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.when;
 public class UserSessionControllerShould {
 
   @Mock
-  TokenUsernameGenerator tokenUsernameGenerator;
+  private TokenGenerator tokenUsernameGenerator;
 
   @InjectMocks
   private UserSessionController userSessionController;

@@ -35,7 +35,7 @@ public class UserDataControllerShould {
     MockitoAnnotations.initMocks(this);
   }
 
-  public void createDummyRepository(DTO.UserSession userSessionDTO){
+  public void createDummyRepository(DTO.UserSession userSessionDTO) {
     sessionInMemoryRepository = new InMemorySessionRepository();
     sessionInMemoryRepository.add(userSessionDTO);
     userDataController.inMemorySessionRepository = sessionInMemoryRepository;
@@ -71,5 +71,29 @@ public class UserDataControllerShould {
 
     Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     Assert.assertEquals("Token can not be empty", response.getBody());
+  }
+
+  @Test
+  public void throws_an_error_when_token_is_not_valid() {
+
+    String username = "username";
+    String token = "token";
+
+    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
+
+    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    Assert.assertEquals("Token not valid", response.getBody());
+  }
+
+  @Test
+  public void throws_an_error_when_username_is_empty() {
+
+    String username = "";
+    String token = TokenTestFactory.createBy(username);
+
+    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
+
+    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    Assert.assertEquals("Username can not be empty", response.getBody());
   }
 }

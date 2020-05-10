@@ -16,6 +16,7 @@ public class UserDataService {
   }
 
   public UserResponse findUser(Username username, Token token) {
+
     DTO.UserSession userSessionDTO = sessionRepository.findUser(username, token);
     return new UserResponse(userSessionDTO.username, userSessionDTO.token, userSessionDTO.date);
   }

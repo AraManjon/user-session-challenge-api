@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * this class is used to return data info based on its session token,
  * choose one of the endpoints to return data info
+ *
  * @param username
  * @param token
  * @return userResponse
@@ -25,12 +26,17 @@ public class UserDataController {
   Repository inMemorySessionRepository;
 
   @GetMapping(value = "/info/{username}/{token}")
-  public ResponseEntity<UserResponse> userInfoGet(@PathVariable String username, @PathVariable String token) {
+  public ResponseEntity<Object> userInfoGet(@PathVariable String username, @PathVariable String token) {
 
-    UserDataService userDataService = new UserDataService(inMemorySessionRepository);
+    try {
 
-    UserResponse userResponse = userDataService.findUser(new Username(username), new Token(token));
+      UserDataService userDataService = new UserDataService(inMemorySessionRepository);
 
-    return new ResponseEntity<>(userResponse, HttpStatus.OK);
+      UserResponse userResponse = userDataService.findUser(new Username(username), new Token(token));
+      return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    } catch (RuntimeException exception) {
+
+      return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
   }
 }

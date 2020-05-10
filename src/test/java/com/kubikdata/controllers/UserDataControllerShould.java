@@ -54,7 +54,7 @@ public class UserDataControllerShould {
     userSessionDTO.date = date;
     createDummyRepository(userSessionDTO);
 
-    ResponseEntity<UserResponse> response = userDataController.userInfoGet(username, token);
+    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
 
     Assert.assertNotNull(response);
     Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -67,7 +67,7 @@ public class UserDataControllerShould {
     String username = "username";
     String token = "";
 
-    ResponseEntity<UserResponse> response = userDataController.userInfoGet(username, token);
+    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
 
     Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     Assert.assertEquals("Token can not be empty", response.getBody());

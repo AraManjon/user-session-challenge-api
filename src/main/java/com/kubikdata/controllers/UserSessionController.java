@@ -45,6 +45,9 @@ public class UserSessionController {
     } catch (RuntimeException exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    } catch (Exception exception) {
+
+      return new ResponseEntity<>("Service unavailable", HttpStatus.SERVICE_UNAVAILABLE);
     }
   }
 }

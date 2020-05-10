@@ -69,9 +69,6 @@ public class UserSessionControllerShould {
     Assert.assertEquals(sessionResponseExpected, response.getBody());
   }
 
-  @Rule
-  public ExpectedException exceptionRule = ExpectedException.none();
-
   @Test
   public void throws_an_error_when_username_is_empty() {
 
@@ -83,5 +80,20 @@ public class UserSessionControllerShould {
 
     Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     Assert.assertEquals("Username can not be empty", response.getBody());
+  }
+
+  @Test
+  public void throws_an_error_when_token_is_empty() {
+
+    String username = "username";
+    String tokenExpected = "";
+    UserSessionRequest userSessionRequest = new UserSessionRequest();
+    userSessionRequest.setUsername(username);
+    when(tokenUsernameGenerator.code(username)).thenReturn(tokenExpected);
+
+    ResponseEntity<Object> response = userSessionController.addSession(userSessionRequest);
+
+    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    Assert.assertEquals("Token can not be empty", response.getBody());
   }
 }

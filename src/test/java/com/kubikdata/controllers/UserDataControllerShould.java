@@ -1,6 +1,5 @@
 package com.kubikdata.controllers;
 
-import com.kubikdata.controllers.request.UserSessionRequest;
 import com.kubikdata.controllers.response.UserResponse;
 import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.infrastructure.Repository;
@@ -18,8 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
-
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserDataControllerShould {

@@ -7,7 +7,6 @@ import com.kubikdata.infrastructure.InMemorySessionRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Date;
 import java.util.Optional;
 
 public class InMemorySessionShould {
@@ -64,6 +63,6 @@ public class InMemorySessionShould {
     inMemorySessionRepository.add(userSession2);
 
     Assert.assertEquals(userSessionExpected,
-        inMemorySessionRepository.findUser(new Username(username), new Token(token)));
+        inMemorySessionRepository.findUser(new Username(username), new Token(token2)));
   }
 }

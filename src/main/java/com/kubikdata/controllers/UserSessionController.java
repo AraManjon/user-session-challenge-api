@@ -34,11 +34,17 @@ public class UserSessionController {
   Repository inMemorySessionRepository;
 
   @PostMapping(value = "/session")
-  public ResponseEntity<SessionResponse> addSession(@RequestBody UserSessionRequest userSessionRequest) {
+  public ResponseEntity<Object> addSession(@RequestBody UserSessionRequest userSessionRequest) {
 
-    UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, dateServer, inMemorySessionRepository);
-    Username username = new Username(userSessionRequest.getUsername());
+    try {
 
-    return new ResponseEntity<>(userSessionService.addSession(username), HttpStatus.OK);
+      UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, dateServer, inMemorySessionRepository);
+      Username username = new Username(userSessionRequest.getUsername());
+
+      return new ResponseEntity<>(userSessionService.addSession(username), HttpStatus.OK);
+    } catch (RuntimeException exception) {
+
+      return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
   }
 }

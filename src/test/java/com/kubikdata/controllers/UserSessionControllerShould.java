@@ -8,8 +8,10 @@ import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -59,7 +61,7 @@ public class UserSessionControllerShould {
     when(tokenUsernameGenerator.code(username)).thenReturn(tokenExpected);
     when(timeDataServer.generate()).thenReturn(date);
     
-    ResponseEntity<SessionResponse> response = userSessionController.addSession(userSessionRequest);
+    ResponseEntity<Object> response = userSessionController.addSession(userSessionRequest);
 
     verify(sessionInMemoryRepository).add(userSessionDTO);
     Assert.assertNotNull(response);
@@ -67,14 +69,19 @@ public class UserSessionControllerShould {
     Assert.assertEquals(sessionResponseExpected, response.getBody());
   }
 
-  @Test(expected = RuntimeException.class)
+  @Rule
+  public ExpectedException exceptionRule = ExpectedException.none();
+
+  @Test
   public void throws_an_error_when_username_is_empty() {
 
     String username = "";
     UserSessionRequest userSessionRequest = new UserSessionRequest();
     userSessionRequest.setUsername(username);
 
-    userSessionController.addSession(userSessionRequest);
+    ResponseEntity<Object> response = userSessionController.addSession(userSessionRequest);
 
+    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    Assert.assertEquals("Username can not be empty", response.getBody());
   }
 }

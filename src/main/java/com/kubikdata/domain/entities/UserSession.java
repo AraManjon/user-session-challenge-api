@@ -1,15 +1,26 @@
 package com.kubikdata.domain.entities;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class UserSession {
   private final Username username;
   private final Token token;
+  private final Date date;
 
-  public UserSession(Username username, Token token) {
+  public UserSession(Username username, Token token, Date date) {
 
     this.username = username;
     this.token = token;
+    this.date = date;
+  }
+
+  public DTO.UserSession createDTO() {
+    DTO.UserSession userSessionDTO = new DTO.UserSession();
+    userSessionDTO.username = this.username.getUsername();
+    userSessionDTO.token = this.token.getToken();
+    userSessionDTO.date = this.date;
+    return userSessionDTO;
   }
 
   @Override
@@ -25,4 +36,5 @@ public class UserSession {
   public int hashCode() {
     return Objects.hash(username, token);
   }
+
 }

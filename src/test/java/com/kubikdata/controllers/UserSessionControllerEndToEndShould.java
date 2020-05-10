@@ -1,8 +1,10 @@
-package com.kubikdata.endtoend;
+package com.kubikdata.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kubikdata.controllers.request.UserSessionRequest;
 import com.kubikdata.controllers.response.UserSessionResponse;
+import com.kubikdata.infrastructure.Repository;
+import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
 import com.kubikdata.services.TokenUsernameGenerator;
 import org.junit.Test;
@@ -35,6 +37,12 @@ public class UserSessionControllerEndToEndShould {
 
   @Autowired
   private TokenGenerator tokenUsernameGenerator;
+
+  @Autowired
+  private TimeServer timeDataServer;
+
+  @Autowired
+  private Repository sessionInMemoryRepository;
 
   @Test
   public void create_a_token_when_add_a_session_correctly() throws Exception {

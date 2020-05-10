@@ -6,7 +6,7 @@ import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.domain.entities.Token;
 import com.kubikdata.domain.entities.Username;
 import com.kubikdata.infrastructure.Repository;
-import com.kubikdata.infrastructure.SessionInMemoryRepository;
+import com.kubikdata.infrastructure.InMemorySessionRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +29,8 @@ public class UserDataServiceShould {
   }
 
   public void createDummyRepository(DTO.UserSession userSessionDTO){
-    sessionInMemoryRepository = new SessionInMemoryRepository();
-    sessionInMemoryRepository.addUser(userSessionDTO);
+    sessionInMemoryRepository = new InMemorySessionRepository();
+    sessionInMemoryRepository.add(userSessionDTO);
   }
 
   @Test

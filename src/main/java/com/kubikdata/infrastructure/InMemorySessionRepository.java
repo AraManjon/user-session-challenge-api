@@ -5,11 +5,8 @@ import com.kubikdata.domain.entities.Token;
 import com.kubikdata.domain.entities.Username;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
-public class SessionInMemoryRepository implements Repository {
+public class InMemorySessionRepository implements Repository {
 
   private DTO.UserSession userSessionList;
 
@@ -17,7 +14,7 @@ public class SessionInMemoryRepository implements Repository {
     return userSessionList;
   }
 
-  public void addUser(DTO.UserSession userSession) {
+  public void add(DTO.UserSession userSession) {
     this.userSessionList = userSession;
   }
 }

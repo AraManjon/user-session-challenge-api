@@ -1,6 +1,6 @@
 package com.kubikdata.domain;
 
-import com.kubikdata.controllers.response.UserSessionResponse;
+import com.kubikdata.controllers.response.SessionResponse;
 import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.domain.entities.Token;
 import com.kubikdata.domain.entities.UserSession;
@@ -16,26 +16,26 @@ import java.util.Date;
 public class UserSessionService {
   private final TokenGenerator tokenGenerator;
   private final TimeServer timeServer;
-  private final Repository sessionInMemoryRepository;
+  private final Repository sessionRepository;
 
-  public UserSessionService(TokenGenerator tokenGenerator, TimeServer timeServer, Repository sessionInMemoryRepository) {
+  public UserSessionService(TokenGenerator tokenGenerator, TimeServer timeServer, Repository sessionRepository) {
 
     this.tokenGenerator = tokenGenerator;
     this.timeServer = timeServer;
-    this.sessionInMemoryRepository = sessionInMemoryRepository;
+    this.sessionRepository = sessionRepository;
   }
 
-  public UserSessionResponse addSession(Username username) {
+  public SessionResponse addSession(Username username) {
 
     UserSession userSession = createUserSession(username);
 
     DTO.UserSession userSessionDTO = userSession.createDTO();
-    sessionInMemoryRepository.addUser(userSessionDTO);
+    sessionRepository.add(userSessionDTO);
 
-    UserSessionResponse userSessionResponse = new UserSessionResponse();
-    userSessionResponse.setToken(tokenGenerator.code(username.getUsername()));
+    SessionResponse sessionResponse = new SessionResponse();
+    sessionResponse.setToken(userSessionDTO.token);
 
-    return userSessionResponse;
+    return sessionResponse;
   }
 
   private UserSession createUserSession(Username username) {

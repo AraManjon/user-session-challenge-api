@@ -3,7 +3,7 @@ package com.kubikdata.unit;
 import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.domain.entities.Token;
 import com.kubikdata.domain.entities.Username;
-import com.kubikdata.infrastructure.SessionInMemoryRepository;
+import com.kubikdata.infrastructure.InMemorySessionRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class SessionInMemoryShould {
 
-  SessionInMemoryRepository sessionInMemoryRepository = new SessionInMemoryRepository();
+  InMemorySessionRepository inMemorySessionRepository = new InMemorySessionRepository();
 
   @Test
   public void add_and_find_userSession_correctly(){
@@ -23,9 +23,9 @@ public class SessionInMemoryShould {
     userSessionExpected.token = token;
     userSessionExpected.date = new Date();
 
-    sessionInMemoryRepository.addUser(userSessionExpected);
+    inMemorySessionRepository.add(userSessionExpected);
 
     Assert.assertEquals(userSessionExpected,
-        sessionInMemoryRepository.findUser(new Username(username), new Token(token)));
+        inMemorySessionRepository.findUser(new Username(username), new Token(token)));
   }
 }

@@ -1,10 +1,9 @@
 package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.request.UserSessionRequest;
-import com.kubikdata.controllers.response.UserSessionResponse;
+import com.kubikdata.controllers.response.SessionResponse;
 import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.infrastructure.Repository;
-import com.kubikdata.infrastructure.SessionInMemoryRepository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
 import org.junit.Assert;
@@ -55,16 +54,16 @@ public class UserSessionControllerShould {
     userSessionDTO.token = tokenExpected;
     UserSessionRequest userSessionRequest = new UserSessionRequest();
     userSessionRequest.setUsername(username);
-    UserSessionResponse userSessionResponseExpected = new UserSessionResponse();
-    userSessionResponseExpected.setToken(tokenExpected);
+    SessionResponse sessionResponseExpected = new SessionResponse();
+    sessionResponseExpected.setToken(tokenExpected);
     when(tokenUsernameGenerator.code(username)).thenReturn("thisIsAToken");
     when(timeDataServer.generate()).thenReturn(date);
     
-    ResponseEntity<UserSessionResponse> response = userSessionController.addSession(userSessionRequest);
+    ResponseEntity<SessionResponse> response = userSessionController.addSession(userSessionRequest);
 
-    verify(sessionInMemoryRepository).addUser(userSessionDTO);
+    verify(sessionInMemoryRepository).add(userSessionDTO);
     Assert.assertNotNull(response);
     Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-    Assert.assertEquals(userSessionResponseExpected, response.getBody());
+    Assert.assertEquals(sessionResponseExpected, response.getBody());
   }
 }

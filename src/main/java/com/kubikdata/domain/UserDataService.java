@@ -8,15 +8,15 @@ import com.kubikdata.infrastructure.Repository;
 
 public class UserDataService {
 
-  private final Repository repository;
+  private final Repository sessionRepository;
 
-  public UserDataService(Repository repository) {
+  public UserDataService(Repository sessionRepository) {
 
-    this.repository = repository;
+    this.sessionRepository = sessionRepository;
   }
 
   public UserResponse findUser(Username username, Token token) {
-    DTO.UserSession userSessionDTO = repository.findUser(username, token);
+    DTO.UserSession userSessionDTO = sessionRepository.findUser(username, token);
     return new UserResponse(userSessionDTO.username, userSessionDTO.token, userSessionDTO.date);
   }
 }

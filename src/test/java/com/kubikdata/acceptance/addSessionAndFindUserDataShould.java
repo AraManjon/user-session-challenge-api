@@ -6,7 +6,7 @@ import com.kubikdata.domain.UserSessionService;
 import com.kubikdata.domain.entities.Token;
 import com.kubikdata.domain.entities.Username;
 import com.kubikdata.infrastructure.Repository;
-import com.kubikdata.infrastructure.SessionInMemoryRepository;
+import com.kubikdata.infrastructure.InMemorySessionRepository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
 import org.junit.Assert;
@@ -30,7 +30,7 @@ public class addSessionAndFindUserDataShould {
   @Mock
   TokenGenerator tokenGenerator;
 
-  Repository sessionInMemoryRepository = new SessionInMemoryRepository();
+  Repository sessionInMemoryRepository = new InMemorySessionRepository();
 
   @Before
   public void setup() {

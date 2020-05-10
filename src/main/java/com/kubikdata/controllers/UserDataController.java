@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserDataController {
 
   @Autowired
-  Repository sessionInMemoryRepository;
+  Repository inMemorySessionRepository;
 
   @GetMapping(value = "/info/{username}/{token}")
   public ResponseEntity<UserResponse> userInfoGet(@PathVariable String username, @PathVariable String token) {
 
-    UserDataService userDataService = new UserDataService(sessionInMemoryRepository);
+    UserDataService userDataService = new UserDataService(inMemorySessionRepository);
 
     UserResponse userResponse = userDataService.findUser(new Username(username), new Token(token));
 

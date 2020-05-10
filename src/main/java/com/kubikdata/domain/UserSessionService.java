@@ -2,9 +2,9 @@ package com.kubikdata.domain;
 
 import com.kubikdata.controllers.response.SessionResponse;
 import com.kubikdata.domain.entities.DTO;
-import com.kubikdata.domain.entities.Token;
+import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.entities.UserSession;
-import com.kubikdata.domain.entities.Username;
+import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;

@@ -56,7 +56,7 @@ public class UserSessionControllerShould {
     userSessionRequest.setUsername(username);
     SessionResponse sessionResponseExpected = new SessionResponse();
     sessionResponseExpected.setToken(tokenExpected);
-    when(tokenUsernameGenerator.code(username)).thenReturn("thisIsAToken");
+    when(tokenUsernameGenerator.code(username)).thenReturn(tokenExpected);
     when(timeDataServer.generate()).thenReturn(date);
     
     ResponseEntity<SessionResponse> response = userSessionController.addSession(userSessionRequest);
@@ -65,5 +65,16 @@ public class UserSessionControllerShould {
     Assert.assertNotNull(response);
     Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     Assert.assertEquals(sessionResponseExpected, response.getBody());
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void throws_an_error_when_username_is_empty() {
+
+    String username = "";
+    UserSessionRequest userSessionRequest = new UserSessionRequest();
+    userSessionRequest.setUsername(username);
+
+    userSessionController.addSession(userSessionRequest);
+
   }
 }

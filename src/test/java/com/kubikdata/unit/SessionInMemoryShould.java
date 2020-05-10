@@ -1,8 +1,8 @@
 package com.kubikdata.unit;
 
 import com.kubikdata.domain.entities.DTO;
-import com.kubikdata.domain.entities.Token;
-import com.kubikdata.domain.entities.Username;
+import com.kubikdata.domain.valueobjects.Token;
+import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.InMemorySessionRepository;
 import org.junit.Assert;
 import org.junit.Test;

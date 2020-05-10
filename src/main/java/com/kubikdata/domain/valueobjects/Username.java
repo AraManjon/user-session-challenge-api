@@ -1,4 +1,4 @@
-package com.kubikdata.domain.entities;
+package com.kubikdata.domain.valueobjects;
 
 public class Username {
 

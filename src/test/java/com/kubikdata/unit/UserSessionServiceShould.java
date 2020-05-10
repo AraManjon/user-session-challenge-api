@@ -3,7 +3,7 @@ package com.kubikdata.unit;
 import com.kubikdata.controllers.response.SessionResponse;
 import com.kubikdata.domain.UserSessionService;
 import com.kubikdata.domain.entities.DTO;
-import com.kubikdata.domain.entities.Username;
+import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenUsernameGenerator;

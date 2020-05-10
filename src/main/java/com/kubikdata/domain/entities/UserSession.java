@@ -1,5 +1,8 @@
 package com.kubikdata.domain.entities;
 
+import com.kubikdata.domain.valueobjects.Token;
+import com.kubikdata.domain.valueobjects.Username;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -36,5 +39,4 @@ public class UserSession {
   public int hashCode() {
     return Objects.hash(username, token);
   }
-
 }

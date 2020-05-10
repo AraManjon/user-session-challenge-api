@@ -1,9 +1,9 @@
 package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.response.UserResponse;
-import com.kubikdata.domain.entities.Token;
+import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.UserDataService;
-import com.kubikdata.domain.entities.Username;
+import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

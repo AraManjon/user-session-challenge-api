@@ -6,6 +6,7 @@ import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
+import com.kubikdata.unit.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -47,8 +48,8 @@ public class UserSessionControllerShould {
   @Test
   public void add_a_session_correctly(){
 
-    String tokenExpected = "thisIsAToken";
     String username = "username";
+    String tokenExpected = TokenTestFactory.createBy(username);
     Date date = new Date();
     DTO.UserSession userSessionDTO = new DTO.UserSession();
     userSessionDTO.username = username;

@@ -4,6 +4,7 @@ import com.kubikdata.controllers.response.UserResponse;
 import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.infrastructure.InMemorySessionRepository;
+import com.kubikdata.unit.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +42,7 @@ public class UserDataControllerShould {
   public void get_user_info_correctly() {
 
     String username = "username";
-    String token = "thisIsAToken";
+    String token = TokenTestFactory.createBy(username);
     Date date = new Date();
     UserResponse userResponseExpected = new UserResponse(username, token, date);
     DTO.UserSession userSessionDTO = new DTO.UserSession();

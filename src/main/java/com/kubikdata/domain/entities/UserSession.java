@@ -12,11 +12,11 @@ public class UserSession {
   private final Date date;
 
   public UserSession(Username username, Token token, Date date) {
-
     this.username = username;
     this.token = token;
     this.date = date;
   }
+
 
   public DTO.UserSession createDTO() {
     DTO.UserSession userSessionDTO = new DTO.UserSession();

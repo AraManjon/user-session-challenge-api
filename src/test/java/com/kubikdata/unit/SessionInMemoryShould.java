@@ -17,7 +17,7 @@ public class SessionInMemoryShould {
   public void add_and_find_userSession_correctly(){
 
     String username = "username";
-    String token = "token";
+    String token = TokenTestFactory.createBy(username);
     DTO.UserSession userSessionExpected = new DTO.UserSession();
     userSessionExpected.username = username;
     userSessionExpected.token = token;

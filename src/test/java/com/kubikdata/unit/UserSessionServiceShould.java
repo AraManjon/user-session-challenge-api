@@ -41,8 +41,8 @@ public class UserSessionServiceShould {
   public void create_a_token_correctly_when_add_user_session() {
 
     UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, timeServer, sessionInMemoryRepository);
-    String token = "randomUserToken";
     String username = "username";
+    String token = TokenTestFactory.createBy(username);
     Date date = new Date();
     DTO.UserSession userSessionDTO = new DTO.UserSession();
     userSessionDTO.username = username;

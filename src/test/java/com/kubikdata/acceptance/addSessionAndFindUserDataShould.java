@@ -9,6 +9,7 @@ import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.infrastructure.InMemorySessionRepository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
+import com.kubikdata.unit.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,12 +42,12 @@ public class addSessionAndFindUserDataShould {
   public void add_session_and_find_user_data(){
 
     String username = "username";
-    String token = "token";
+    String token = TokenTestFactory.createBy(username);
     Date date = new Date();
     UserResponse userResponseExpected = new UserResponse(username, token, date);
     UserSessionService userSessionService = new UserSessionService(tokenGenerator, timeServer, sessionInMemoryRepository);
     UserDataService userDataService = new UserDataService(sessionInMemoryRepository);
-    when(tokenGenerator.code(username)).thenReturn("token");
+    when(tokenGenerator.code(username)).thenReturn(token);
     when(timeServer.generate()).thenReturn(date);
 
     userSessionService.addSession(new Username(username));

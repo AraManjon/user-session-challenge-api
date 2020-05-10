@@ -8,6 +8,7 @@ import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
 import com.kubikdata.services.TokenUsernameGenerator;
+import com.kubikdata.unit.TokenTestFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -73,7 +74,7 @@ public class UserDataControllerEndToEndShould {
 
     String username = new Random().toString();
     Date date = new Date();
-    String token = "token";
+    String token = TokenTestFactory.createBy(username);
     createDummyRepository(username, token, date);
     UserResponse userResponseExpected = new UserResponse(username, token, date);
 

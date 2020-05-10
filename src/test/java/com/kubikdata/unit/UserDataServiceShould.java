@@ -37,7 +37,7 @@ public class UserDataServiceShould {
   public void find_user_data_correctly() {
 
     String username = "username";
-    String token = "thisIsAToken";
+    String token = TokenTestFactory.createBy(username);
     Date date = new Date();
     UserResponse userResponseExpected = new UserResponse(username, token, date);
     DTO.UserSession userSessionDTO = new DTO.UserSession();

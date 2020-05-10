@@ -1,5 +1,6 @@
 package com.kubikdata.controllers;
 
+import com.kubikdata.controllers.request.UserSessionRequest;
 import com.kubikdata.controllers.response.UserResponse;
 import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.infrastructure.Repository;
@@ -17,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
+
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserDataControllerShould {
@@ -56,5 +59,17 @@ public class UserDataControllerShould {
     Assert.assertNotNull(response);
     Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     Assert.assertEquals(userResponseExpected, response.getBody());
+  }
+
+  @Test
+  public void throws_an_error_when_token_is_empty() {
+
+    String username = "username";
+    String token = "";
+
+    ResponseEntity<UserResponse> response = userDataController.userInfoGet(username, token);
+
+    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    Assert.assertEquals("Token can not be empty", response.getBody());
   }
 }

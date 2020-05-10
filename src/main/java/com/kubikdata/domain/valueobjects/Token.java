@@ -15,7 +15,7 @@ public class Token {
   }
 
   private boolean validate(String token) {
-    Matcher matcher = VALID_TOKEN_REGEX .matcher(token);
+    Matcher matcher = VALID_TOKEN_REGEX.matcher(token);
     return matcher.find();
   }
 

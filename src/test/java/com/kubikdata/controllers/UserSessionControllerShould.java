@@ -46,7 +46,7 @@ public class UserSessionControllerShould {
   }
 
   @Test
-  public void add_a_session_correctly(){
+  public void add_a_session_correctly() {
 
     String username = "username";
     String tokenExpected = TokenTestFactory.createBy(username);
@@ -61,7 +61,7 @@ public class UserSessionControllerShould {
     sessionResponseExpected.setToken(tokenExpected);
     when(tokenUsernameGenerator.code(username)).thenReturn(tokenExpected);
     when(timeDataServer.generate()).thenReturn(date);
-    
+
     ResponseEntity<Object> response = userSessionController.addSession(userSessionRequest);
 
     verify(sessionInMemoryRepository).add(userSessionDTO);
@@ -81,20 +81,5 @@ public class UserSessionControllerShould {
 
     Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     Assert.assertEquals("Username can not be empty", response.getBody());
-  }
-
-  @Test
-  public void throws_an_error_when_token_is_empty() {
-
-    String username = "username";
-    String tokenExpected = "";
-    UserSessionRequest userSessionRequest = new UserSessionRequest();
-    userSessionRequest.setUsername(username);
-    when(tokenUsernameGenerator.code(username)).thenReturn(tokenExpected);
-
-    ResponseEntity<Object> response = userSessionController.addSession(userSessionRequest);
-
-    Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
-    Assert.assertEquals("Service unavailable", response.getBody());
   }
 }

@@ -2,6 +2,7 @@ package com.kubikdata.unit;
 
 import com.kubikdata.controllers.response.UserSessionResponse;
 import com.kubikdata.domain.UserSessionService;
+import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.domain.entities.Username;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.services.TimeServer;
@@ -14,6 +15,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
+
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -39,10 +43,17 @@ public class UserSessionServiceShould {
     UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, timeServer, sessionInMemoryRepository);
     String token = "randomUserToken";
     String username = "username";
+    Date date = new Date();
+    DTO.UserSession userSessionDTO = new DTO.UserSession();
+    userSessionDTO.username = username;
+    userSessionDTO.token = token;
+    userSessionDTO.date = date;
     UserSessionResponse userSessionResponse = new UserSessionResponse();
     userSessionResponse.setToken(token);
     when(tokenUsernameGenerator.code(username)).thenReturn(token);
+    when(timeServer.generate()).thenReturn(date);
 
     Assert.assertEquals(userSessionResponse, userSessionService.addSession(new Username(username)));
+    verify(sessionInMemoryRepository).addUser(userSessionDTO);
   }
 }

@@ -2,6 +2,7 @@ package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.request.UserSessionRequest;
 import com.kubikdata.controllers.response.SessionResponse;
+import com.kubikdata.domain.entities.NotAllowedEmptyUsername;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.services.TimeServer;
@@ -42,7 +43,7 @@ public class UserSessionController {
       Username username = new Username(userSessionRequest.getUsername());
 
       return new ResponseEntity<>(userSessionService.addSession(username), HttpStatus.OK);
-    } catch (RuntimeException exception) {
+    } catch (NotAllowedEmptyUsername exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     } catch (Exception exception) {

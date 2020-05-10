@@ -94,7 +94,7 @@ public class UserSessionControllerShould {
 
     ResponseEntity<Object> response = userSessionController.addSession(userSessionRequest);
 
-    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-    Assert.assertEquals("Token can not be empty", response.getBody());
+    Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
+    Assert.assertEquals("Service unavailable", response.getBody());
   }
 }

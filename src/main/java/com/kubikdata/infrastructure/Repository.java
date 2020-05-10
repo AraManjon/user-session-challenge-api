@@ -4,7 +4,9 @@ import com.kubikdata.domain.entities.DTO;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 
+import java.util.Optional;
+
 public interface Repository {
-  DTO.UserSession findUser(Username username, Token token);
+  Optional<DTO.UserSession> findUser(Username username, Token token);
   void add(DTO.UserSession userSession);
 }

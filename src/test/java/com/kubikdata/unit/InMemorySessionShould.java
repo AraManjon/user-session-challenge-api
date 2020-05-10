@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class InMemorySessionShould {
 
@@ -18,12 +19,10 @@ public class InMemorySessionShould {
 
     String username = "username";
     String token = TokenTestFactory.createBy(username);
-    DTO.UserSession userSessionExpected = new DTO.UserSession();
-    userSessionExpected.username = username;
-    userSessionExpected.token = token;
-    userSessionExpected.date = new Date();
+    DTO.UserSession userSessionDTO =  UserSessionDTOTestFactory.create(username, token);
+    Optional<DTO.UserSession> userSessionExpected = Optional.of(userSessionDTO);
 
-    inMemorySessionRepository.add(userSessionExpected);
+    inMemorySessionRepository.add(userSessionDTO);
 
     Assert.assertEquals(userSessionExpected,
         inMemorySessionRepository.findUser(new Username(username), new Token(token)));
@@ -34,18 +33,18 @@ public class InMemorySessionShould {
 
     String username = "username";
     String token = TokenTestFactory.createBy(username);
-    DTO.UserSession userSessionExpected = UserSessionDTOTestFactory.create(username, token);
-    String username2 = "username";
+    DTO.UserSession userSession1 = UserSessionDTOTestFactory.create(username, token);
+    String username2 = "username2";
     String token2 = TokenTestFactory.createBy(username2);
     DTO.UserSession userSession2 = UserSessionDTOTestFactory.create(username2, token2);
-    String username3 = "username";
+    String username3 = "username3";
     String token3 = TokenTestFactory.createBy(username3);
     DTO.UserSession userSession3 = UserSessionDTOTestFactory.create(username3, token3);
+    Optional<DTO.UserSession> userSessionExpected = Optional.of(userSession1);
 
-    inMemorySessionRepository.add(userSessionExpected);
+    inMemorySessionRepository.add(userSession1);
     inMemorySessionRepository.add(userSession2);
     inMemorySessionRepository.add(userSession3);
-
 
     Assert.assertEquals(userSessionExpected,
         inMemorySessionRepository.findUser(new Username(username), new Token(token)));

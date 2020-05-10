@@ -6,6 +6,8 @@ import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.Repository;
 
+import java.util.Optional;
+
 public class UserDataService {
 
   private final Repository sessionRepository;
@@ -17,7 +19,8 @@ public class UserDataService {
 
   public UserResponse findUser(Username username, Token token) {
 
-    DTO.UserSession userSessionDTO = sessionRepository.findUser(username, token);
-    return new UserResponse(userSessionDTO.username, userSessionDTO.token, userSessionDTO.date);
+    Optional<DTO.UserSession> userSessionDTO = sessionRepository.findUser(username, token);
+    if(!userSessionDTO.isPresent()) throw new RuntimeException();
+    return new UserResponse(userSessionDTO.get().username, userSessionDTO.get().token, userSessionDTO.get().date);
   }
 }

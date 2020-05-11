@@ -7,6 +7,7 @@ import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.infrastructure.InMemorySessionRepository;
+import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

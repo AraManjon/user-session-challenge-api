@@ -2,9 +2,11 @@ package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.response.UserResponse;
 import com.kubikdata.domain.entities.DTO;
+import com.kubikdata.domain.valueobjects.Token;
+import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.infrastructure.InMemorySessionRepository;
-import com.kubikdata.unit.TokenTestFactory;
+import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +19,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
+
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserDataControllerShould {
@@ -92,5 +96,17 @@ public class UserDataControllerShould {
 
     Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     Assert.assertEquals("Username can not be empty", response.getBody());
+  }
+
+  @Test
+  public void throw_an_error_when_not_found_a_user_session() {
+
+    String username = "username";
+    String token = TokenTestFactory.createBy(username);
+    when(sessionInMemoryRepository.findUser(new Username(username), new Token(token))).thenReturn(null);
+    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
+
+    Assert.assertEquals(HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());
+    Assert.assertEquals("Session not found", response.getBody());
   }
 }

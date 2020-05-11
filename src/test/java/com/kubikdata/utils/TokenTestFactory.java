@@ -1,4 +1,4 @@
-package com.kubikdata.unit;
+package com.kubikdata.utils;
 
 import com.kubikdata.services.TokenUsernameGenerator;
 

@@ -9,7 +9,7 @@ import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.infrastructure.InMemorySessionRepository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
-import com.kubikdata.unit.TokenTestFactory;
+import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

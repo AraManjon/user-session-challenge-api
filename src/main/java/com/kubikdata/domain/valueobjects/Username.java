@@ -1,6 +1,6 @@
 package com.kubikdata.domain.valueobjects;
 
-import com.kubikdata.domain.entities.NotAllowedEmptyUsername;
+import com.kubikdata.domain.exceptions.NotAllowedEmptyUsername;
 
 import java.util.Objects;
 

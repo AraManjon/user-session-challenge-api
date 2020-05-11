@@ -1,4 +1,4 @@
-package com.kubikdata.domain.entities;
+package com.kubikdata.domain.exceptions;
 
 public class NotAllowedEmptyUsername extends RuntimeException {
   public NotAllowedEmptyUsername(String message) {

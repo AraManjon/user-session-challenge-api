@@ -7,6 +7,7 @@ import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenUsernameGenerator;
+import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

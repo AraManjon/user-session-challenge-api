@@ -2,13 +2,11 @@ package com.kubikdata.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kubikdata.controllers.request.UserSessionRequest;
-import com.kubikdata.controllers.response.SessionResponse;
 import com.kubikdata.controllers.response.UserResponse;
 import com.kubikdata.infrastructure.Repository;
 import com.kubikdata.services.TimeServer;
 import com.kubikdata.services.TokenGenerator;
-import com.kubikdata.services.TokenUsernameGenerator;
-import com.kubikdata.unit.TokenTestFactory;
+import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

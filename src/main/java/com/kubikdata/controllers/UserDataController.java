@@ -1,6 +1,7 @@
 package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.response.UserResponse;
+import com.kubikdata.domain.exceptions.SessionNotFound;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.UserDataService;
 import com.kubikdata.domain.valueobjects.Username;
@@ -29,14 +30,19 @@ public class UserDataController {
   public ResponseEntity<Object> userInfoGet(@PathVariable String username, @PathVariable String token) {
 
     try {
-
       UserDataService userDataService = new UserDataService(inMemorySessionRepository);
 
       UserResponse userResponse = userDataService.findUser(new Username(username), new Token(token));
       return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    } catch (SessionNotFound exception) {
+
+      return new ResponseEntity<>(exception.getMessage(), HttpStatus.METHOD_NOT_ALLOWED);
     } catch (RuntimeException exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }catch (Exception exception) {
+
+      return new ResponseEntity<>("Service unavailable", HttpStatus.SERVICE_UNAVAILABLE);
     }
   }
 }

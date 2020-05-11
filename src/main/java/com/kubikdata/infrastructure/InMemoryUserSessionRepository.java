@@ -2,7 +2,6 @@ package com.kubikdata.infrastructure;
 
 import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.infrastructure.Repository;
-import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 import org.springframework.stereotype.Component;
 
@@ -14,16 +13,13 @@ public class InMemoryUserSessionRepository implements Repository {
 
   private final List<DTO.UserSession> userSessionList = new ArrayList<>();
 
-  public Optional<DTO.UserSession> find(Username username, Token token) {
+  public Optional<DTO.UserSession> find(Username username) {
 
     Predicate<DTO.UserSession> isSameUsername = userSession ->
         userSession.username.equals(username.getUsername());
 
-    Predicate<DTO.UserSession> isSameToken = userSession ->
-        userSession.token.equals(token.getToken());
-
     return this.userSessionList.stream()
-        .filter(isSameUsername.and(isSameToken))
+        .filter(isSameUsername)
         .findFirst();
   }
 

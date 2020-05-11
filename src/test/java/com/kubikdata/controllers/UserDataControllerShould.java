@@ -2,7 +2,6 @@ package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.response.UserDataResponse;
 import com.kubikdata.domain.dto.DTO;
-import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.domain.infrastructure.Repository;
 import com.kubikdata.infrastructure.InMemoryUserSessionRepository;
@@ -19,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
@@ -63,18 +63,6 @@ public class UserDataControllerShould {
   }
 
   @Test
-  public void throws_an_error_when_token_is_empty() {
-
-    String username = "username";
-    String token = "";
-
-    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
-
-    Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
-    Assert.assertEquals("Service unavailable", response.getBody());
-  }
-
-  @Test
   public void throws_an_error_when_token_is_not_valid() {
 
     String username = "username";
@@ -91,7 +79,7 @@ public class UserDataControllerShould {
 
     String username = "username";
     String token = TokenTestFactory.createBy(username);
-    when(sessionInMemoryRepository.find(new Username(username), new Token(token))).thenReturn(null);
+    when(sessionInMemoryRepository.find(new Username(username))).thenReturn(Optional.empty());
     ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
 
     Assert.assertEquals(HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());
@@ -103,6 +91,18 @@ public class UserDataControllerShould {
 
     String username = "";
     String token = TokenTestFactory.createBy(username);
+
+    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
+
+    Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
+    Assert.assertEquals("Service unavailable", response.getBody());
+  }
+
+  @Test
+  public void throws_an_error_when_token_is_empty() {
+
+    String username = "username";
+    String token = "";
 
     ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
 

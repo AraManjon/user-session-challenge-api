@@ -25,9 +25,9 @@ public class UserDataService {
 
   public UserDataResponse findUser(Username username, Token token) {
 
-    Optional<DTO.UserSession> userSessionDTO = repository.find(username, token);
+    Optional<DTO.UserSession> userSessionDTO = repository.find(username);
 
-    if (!userSessionDTO.isPresent()) throw new UserSessionNotFound("Session not found");
+    if (!userSessionDTO.isPresent() || !userSessionDTO.get().token.equals(token.getToken())) throw new UserSessionNotFound("Session not found");
 
     return new UserDataResponse(userSessionDTO.get().username, userSessionDTO.get().token, userSessionDTO.get().date);
   }

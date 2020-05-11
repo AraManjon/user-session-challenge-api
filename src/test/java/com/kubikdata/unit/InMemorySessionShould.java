@@ -1,7 +1,6 @@
 package com.kubikdata.unit;
 
 import com.kubikdata.domain.dto.DTO;
-import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.infrastructure.InMemoryUserSessionRepository;
 import com.kubikdata.utils.TokenTestFactory;
@@ -26,7 +25,7 @@ public class InMemorySessionShould {
     inMemoryUserSessionRepository.add(userSessionDTO);
 
     Assert.assertEquals(userSessionExpected,
-        inMemoryUserSessionRepository.find(new Username(username), new Token(token)));
+        inMemoryUserSessionRepository.find(new Username(username)));
   }
 
   @Test
@@ -48,7 +47,7 @@ public class InMemorySessionShould {
     inMemoryUserSessionRepository.add(userSession3);
 
     Assert.assertEquals(userSessionExpected,
-        inMemoryUserSessionRepository.find(new Username(username), new Token(token)));
+        inMemoryUserSessionRepository.find(new Username(username)));
   }
 
   @Test
@@ -65,6 +64,6 @@ public class InMemorySessionShould {
     inMemoryUserSessionRepository.add(userSession2);
 
     Assert.assertEquals(userSessionExpected,
-        inMemoryUserSessionRepository.find(new Username(username), new Token(token2)));
+        inMemoryUserSessionRepository.find(new Username(username)));
   }
 }

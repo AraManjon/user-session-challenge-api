@@ -70,8 +70,8 @@ public class UserDataControllerShould {
 
     ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
 
-    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-    Assert.assertEquals("Token can not be empty", response.getBody());
+    Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
+    Assert.assertEquals("Service unavailable", response.getBody());
   }
 
   @Test
@@ -87,18 +87,6 @@ public class UserDataControllerShould {
   }
 
   @Test
-  public void throws_an_error_when_username_is_empty() {
-
-    String username = "";
-    String token = TokenTestFactory.createBy(username);
-
-    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
-
-    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-    Assert.assertEquals("Username can not be empty", response.getBody());
-  }
-
-  @Test
   public void throw_an_error_when_not_found_a_user_session() {
 
     String username = "username";
@@ -108,5 +96,17 @@ public class UserDataControllerShould {
 
     Assert.assertEquals(HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());
     Assert.assertEquals("Session not found", response.getBody());
+  }
+
+  @Test
+  public void throws_an_error_when_username_is_empty() {
+
+    String username = "";
+    String token = TokenTestFactory.createBy(username);
+
+    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
+
+    Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
+    Assert.assertEquals("Service unavailable", response.getBody());
   }
 }

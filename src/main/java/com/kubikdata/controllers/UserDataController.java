@@ -1,7 +1,7 @@
 package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.response.UserDataResponse;
-import com.kubikdata.domain.exceptions.UserSessionException;
+import com.kubikdata.domain.exceptions.TokenIsNotValid;
 import com.kubikdata.domain.exceptions.UserSessionNotFound;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.UserDataService;
@@ -26,9 +26,9 @@ public class UserDataController {
    * @param username needed to find userSession
    * @param token    needed to find userSession
    * @return UserDataResponse
-   * @throws UserSessionNotFound  "Session not found"
-   * @throws UserSessionException "Token not valid"
-   * @throws RuntimeException     "Service unavailable"
+   * @throws UserSessionNotFound "Session not found"
+   * @throws TokenIsNotValid     "Token not valid"
+   * @throws RuntimeException    "Service unavailable"
    */
   @GetMapping(value = "/info/{username}/{token}")
   public ResponseEntity<Object> userInfoGet(@PathVariable String username, @PathVariable String token) {
@@ -41,7 +41,7 @@ public class UserDataController {
     } catch (UserSessionNotFound exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.METHOD_NOT_ALLOWED);
-    } catch (UserSessionException exception) {
+    } catch (TokenIsNotValid exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     } catch (RuntimeException exception) {

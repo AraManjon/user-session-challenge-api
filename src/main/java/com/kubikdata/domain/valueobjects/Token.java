@@ -1,6 +1,6 @@
 package com.kubikdata.domain.valueobjects;
 
-import com.kubikdata.domain.exceptions.UserSessionException;
+import com.kubikdata.domain.exceptions.TokenIsNotValid;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,9 +12,9 @@ public class Token {
 
   public Token(String token) {
 
-    if (token.isEmpty()) throw new RuntimeException("Token can not be empty");
+    if (token.isEmpty()) throw new RuntimeException();
 
-    if (!validate(token)) throw new UserSessionException("Token not valid");
+    if (!validate(token)) throw new TokenIsNotValid("Token not valid");
 
     this.token = token;
   }

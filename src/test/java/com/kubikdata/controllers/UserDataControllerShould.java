@@ -1,11 +1,11 @@
 package com.kubikdata.controllers;
 
-import com.kubikdata.controllers.response.UserResponse;
+import com.kubikdata.controllers.response.UserDataResponse;
 import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.domain.infrastructure.Repository;
-import com.kubikdata.infrastructure.InMemorySessionRepository;
+import com.kubikdata.infrastructure.InMemoryUserSessionRepository;
 import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
@@ -37,9 +37,9 @@ public class UserDataControllerShould {
   }
 
   public void createDummyRepository(DTO.UserSession userSessionDTO) {
-    sessionInMemoryRepository = new InMemorySessionRepository();
+    sessionInMemoryRepository = new InMemoryUserSessionRepository();
     sessionInMemoryRepository.add(userSessionDTO);
-    userDataController.inMemorySessionRepository = sessionInMemoryRepository;
+    userDataController.inMemoryUserSessionRepository = sessionInMemoryRepository;
   }
 
   @Test
@@ -48,7 +48,7 @@ public class UserDataControllerShould {
     String username = "username";
     String token = TokenTestFactory.createBy(username);
     Date date = new Date();
-    UserResponse userResponseExpected = new UserResponse(username, token, date);
+    UserDataResponse userDataResponseExpected = new UserDataResponse(username, token, date);
     DTO.UserSession userSessionDTO = new DTO.UserSession();
     userSessionDTO.username = username;
     userSessionDTO.token = token;
@@ -59,7 +59,7 @@ public class UserDataControllerShould {
 
     Assert.assertNotNull(response);
     Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-    Assert.assertEquals(userResponseExpected, response.getBody());
+    Assert.assertEquals(userDataResponseExpected, response.getBody());
   }
 
   @Test

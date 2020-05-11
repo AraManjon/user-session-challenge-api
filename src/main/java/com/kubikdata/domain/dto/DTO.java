@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.Objects;
 
 public interface DTO {
-  class UserSession{
+
+  class UserSession {
 
     public String username;
     public String token;

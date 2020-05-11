@@ -2,7 +2,7 @@ package com.kubikdata.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kubikdata.controllers.request.UserSessionRequest;
-import com.kubikdata.controllers.response.UserResponse;
+import com.kubikdata.controllers.response.UserDataResponse;
 import com.kubikdata.domain.infrastructure.Repository;
 import com.kubikdata.domain.infrastructure.TimeServer;
 import com.kubikdata.domain.infrastructure.TokenGenerator;
@@ -74,15 +74,15 @@ public class UserDataControllerEndToEndShould {
     Date date = new Date();
     String token = TokenTestFactory.createBy(username);
     createDummyRepository(username, token, date);
-    UserResponse userResponseExpected = new UserResponse(username, token, date);
+    UserDataResponse userDataResponseExpected = new UserDataResponse(username, token, date);
 
     MvcResult result = this.mockMvc.perform(get("/info/"+username+"/"+token))
         .andDo(print()).andExpect(status().is(200))
         .andReturn();
     String resultAsString = result.getResponse().getContentAsString();
-    UserResponse userResponse = objectMapper.readValue(resultAsString, UserResponse.class);
+    UserDataResponse userDataResponse = objectMapper.readValue(resultAsString, UserDataResponse.class);
 
     Assertions.assertNotNull(resultAsString);
-    Assertions.assertEquals(userResponseExpected, userResponse);
+    Assertions.assertEquals(userDataResponseExpected, userDataResponse);
   }
 }

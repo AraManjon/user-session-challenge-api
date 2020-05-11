@@ -2,7 +2,7 @@ package com.kubikdata.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kubikdata.controllers.request.UserSessionRequest;
-import com.kubikdata.controllers.response.SessionResponse;
+import com.kubikdata.controllers.response.UserSessionResponse;
 import com.kubikdata.domain.infrastructure.Repository;
 import com.kubikdata.domain.infrastructure.TimeServer;
 import com.kubikdata.domain.infrastructure.TokenGenerator;
@@ -57,9 +57,9 @@ public class UserSessionControllerEndToEndShould {
         .content(jsonRequest)).andDo(print()).andExpect(status().is(200))
         .andReturn();
     String resultAsString = result.getResponse().getContentAsString();
-    SessionResponse sessionResponse = objectMapper.readValue(resultAsString, SessionResponse.class);
+    UserSessionResponse userSessionResponse = objectMapper.readValue(resultAsString, UserSessionResponse.class);
 
     Assertions.assertNotNull(resultAsString);
-    Assertions.assertEquals(username, generator.decode(sessionResponse.getToken()).getSubject());
+    Assertions.assertEquals(username, generator.decode(userSessionResponse.getToken()).getSubject());
   }
 }

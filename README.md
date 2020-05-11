@@ -1,7 +1,7 @@
-# User Session Token Challenge
+# User Session Challenge
 
-User Session Token Challenge is a project created to solve a needed: know when a user has been logged in the system.
-The solution has been implement a User Session Token Generator that works from a username given.
+User Session Challenge is a project created to solve a needed: know when a user has been logged in the system.
+The solution has been implement a User Session Generator that works from a username given.
 
 Api is a spring boot project written in Java 8.
 
@@ -27,19 +27,19 @@ Finally, it's realized a test end-to-end for each endpoint. And to test all proj
 
 - One endpoint to return session token
 
-Notes: **Session Token** = **User Session Token**:  Username + token + current logging date
+Notes: **Session Token** = **User Session**:  Username + token + current logging date
 
 - One endpoint to add this information to a specific user
 
-Notes: **Add this information to a specific user**: create User Session Token where is added token and date to a username.
+Notes: **Add this information to a specific user**: create User Session where is added token and date to a username.
 
-#### :rocket: User Session Token Service
+#### :rocket: User Session Service
 
 ##### Implementation:
 
 :mag: Create a token by username.
 
-:mag: Add token and date to user in a user session token.
+:mag: Add token and date to user in a User Session.
 
 :mag: Return token.
 
@@ -47,7 +47,7 @@ Notes: **Add this information to a specific user**: create User Session Token wh
 
 :x: Username cannot be empty.
 
-**Create User Session Token**
+**Create User Session**
  
 > POST/session
 
@@ -61,7 +61,7 @@ Notes: **Add this information to a specific user**: create User Session Token wh
 
 ##### Implementation:
 
-:mag: Retrieve User Session Token by username and token.
+:mag: Retrieve User Session by username and token.
 
 
 ##### Constraints:
@@ -74,4 +74,4 @@ Notes: **Add this information to a specific user**: create User Session Token wh
  
 > GET/info/{username}/{token}
 
-**Notes:** Is created an InMemoryRepository to persist User Session Token.
+**Notes:** Is created an InMemoryRepository to persist User Session.

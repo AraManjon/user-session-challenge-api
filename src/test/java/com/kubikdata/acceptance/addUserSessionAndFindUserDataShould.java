@@ -1,12 +1,12 @@
 package com.kubikdata.acceptance;
 
-import com.kubikdata.controllers.response.UserResponse;
+import com.kubikdata.controllers.response.UserDataResponse;
 import com.kubikdata.domain.UserDataService;
 import com.kubikdata.domain.UserSessionService;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.domain.infrastructure.Repository;
-import com.kubikdata.infrastructure.InMemorySessionRepository;
+import com.kubikdata.infrastructure.InMemoryUserSessionRepository;
 import com.kubikdata.domain.infrastructure.TimeServer;
 import com.kubikdata.domain.infrastructure.TokenGenerator;
 import com.kubikdata.utils.TokenTestFactory;
@@ -23,7 +23,7 @@ import java.util.Date;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class addSessionAndFindUserDataShould {
+public class addUserSessionAndFindUserDataShould {
 
   @Mock
   TimeServer timeServer;
@@ -31,7 +31,7 @@ public class addSessionAndFindUserDataShould {
   @Mock
   TokenGenerator tokenGenerator;
 
-  Repository sessionInMemoryRepository = new InMemorySessionRepository();
+  Repository repository = new InMemoryUserSessionRepository();
 
   @Before
   public void setup() {
@@ -39,20 +39,20 @@ public class addSessionAndFindUserDataShould {
   }
 
   @Test
-  public void add_session_and_find_user_data(){
+  public void add_user_session_and_find_user_data(){
 
     String username = "username";
     String token = TokenTestFactory.createBy(username);
     Date date = new Date();
-    UserResponse userResponseExpected = new UserResponse(username, token, date);
-    UserSessionService userSessionService = new UserSessionService(tokenGenerator, timeServer, sessionInMemoryRepository);
-    UserDataService userDataService = new UserDataService(sessionInMemoryRepository);
+    UserDataResponse userDataResponseExpected = new UserDataResponse(username, token, date);
+    UserSessionService userSessionService = new UserSessionService(tokenGenerator, timeServer, repository);
+    UserDataService userDataService = new UserDataService(repository);
     when(tokenGenerator.code(username)).thenReturn(token);
     when(timeServer.generate()).thenReturn(date);
 
     userSessionService.addSession(new Username(username));
 
-    Assert.assertEquals(userResponseExpected,
+    Assert.assertEquals(userDataResponseExpected,
         userDataService.findUser(new Username(username), new Token(token)));
   }
 }

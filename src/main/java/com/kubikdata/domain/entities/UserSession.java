@@ -18,7 +18,6 @@ public class UserSession {
     this.date = date;
   }
 
-
   public DTO.UserSession createDTO() {
     DTO.UserSession userSessionDTO = new DTO.UserSession();
     userSessionDTO.username = this.username.getUsername();

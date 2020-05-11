@@ -1,7 +1,7 @@
 package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.request.UserSessionRequest;
-import com.kubikdata.controllers.response.SessionResponse;
+import com.kubikdata.controllers.response.UserSessionResponse;
 import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.infrastructure.Repository;
 import com.kubikdata.domain.infrastructure.TimeServer;
@@ -55,8 +55,8 @@ public class UserSessionControllerShould {
     userSessionDTO.token = tokenExpected;
     UserSessionRequest userSessionRequest = new UserSessionRequest();
     userSessionRequest.setUsername(username);
-    SessionResponse sessionResponseExpected = new SessionResponse();
-    sessionResponseExpected.setToken(tokenExpected);
+    UserSessionResponse userSessionResponseExpected = new UserSessionResponse();
+    userSessionResponseExpected.setToken(tokenExpected);
     when(tokenUsernameGenerator.code(username)).thenReturn(tokenExpected);
     when(timeDataServer.generate()).thenReturn(date);
 
@@ -65,7 +65,7 @@ public class UserSessionControllerShould {
     verify(sessionInMemoryRepository).add(userSessionDTO);
     Assert.assertNotNull(response);
     Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-    Assert.assertEquals(sessionResponseExpected, response.getBody());
+    Assert.assertEquals(userSessionResponseExpected, response.getBody());
   }
 
   @Test

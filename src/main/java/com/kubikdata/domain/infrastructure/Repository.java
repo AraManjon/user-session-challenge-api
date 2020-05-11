@@ -7,6 +7,8 @@ import com.kubikdata.domain.valueobjects.Username;
 import java.util.Optional;
 
 public interface Repository {
+
   Optional<DTO.UserSession> find(Username username, Token token);
+
   void add(DTO.UserSession userSession);
 }

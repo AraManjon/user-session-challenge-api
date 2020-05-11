@@ -1,6 +1,6 @@
 package com.kubikdata.unit;
 
-import com.kubikdata.controllers.response.SessionResponse;
+import com.kubikdata.controllers.response.UserSessionResponse;
 import com.kubikdata.domain.UserSessionService;
 import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Username;
@@ -49,12 +49,12 @@ public class UserSessionServiceShould {
     userSessionDTO.username = username;
     userSessionDTO.token = token;
     userSessionDTO.date = date;
-    SessionResponse sessionResponse = new SessionResponse();
-    sessionResponse.setToken(token);
+    UserSessionResponse userSessionResponse = new UserSessionResponse();
+    userSessionResponse.setToken(token);
     when(tokenUsernameGenerator.code(username)).thenReturn(token);
     when(timeServer.generate()).thenReturn(date);
 
-    Assert.assertEquals(sessionResponse, userSessionService.addSession(new Username(username)));
+    Assert.assertEquals(userSessionResponse, userSessionService.addSession(new Username(username)));
     verify(sessionInMemoryRepository).add(userSessionDTO);
   }
 }

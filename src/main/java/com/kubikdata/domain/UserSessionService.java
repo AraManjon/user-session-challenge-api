@@ -1,6 +1,6 @@
 package com.kubikdata.domain;
 
-import com.kubikdata.controllers.response.SessionResponse;
+import com.kubikdata.controllers.response.UserSessionResponse;
 import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.entities.UserSession;
@@ -12,30 +12,33 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * this class create userSession and add to repository
+ */
 @Service
 public class UserSessionService {
   private final TokenGenerator tokenGenerator;
   private final TimeServer timeServer;
-  private final Repository sessionRepository;
+  private final Repository repository;
 
-  public UserSessionService(TokenGenerator tokenGenerator, TimeServer timeServer, Repository sessionRepository) {
+  public UserSessionService(TokenGenerator tokenGenerator, TimeServer timeServer, Repository repository) {
 
     this.tokenGenerator = tokenGenerator;
     this.timeServer = timeServer;
-    this.sessionRepository = sessionRepository;
+    this.repository = repository;
   }
 
-  public SessionResponse addSession(Username username) {
+  public UserSessionResponse addSession(Username username) {
 
     UserSession userSession = createUserSession(username);
 
     DTO.UserSession userSessionDTO = userSession.createDTO();
-    sessionRepository.add(userSessionDTO);
+    repository.add(userSessionDTO);
 
-    SessionResponse sessionResponse = new SessionResponse();
-    sessionResponse.setToken(userSessionDTO.token);
+    UserSessionResponse userSessionResponse = new UserSessionResponse();
+    userSessionResponse.setToken(userSessionDTO.token);
 
-    return sessionResponse;
+    return userSessionResponse;
   }
 
   private UserSession createUserSession(Username username) {

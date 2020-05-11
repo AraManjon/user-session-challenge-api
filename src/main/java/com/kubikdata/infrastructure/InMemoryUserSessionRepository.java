@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 @Component
-public class InMemorySessionRepository implements Repository {
+public class InMemoryUserSessionRepository implements Repository {
 
   private final List<DTO.UserSession> userSessionList = new ArrayList<>();
 
@@ -18,6 +18,7 @@ public class InMemorySessionRepository implements Repository {
 
     Predicate<DTO.UserSession> isSameUsername = userSession ->
         userSession.username.equals(username.getUsername());
+
     Predicate<DTO.UserSession> isSameToken = userSession ->
         userSession.token.equals(token.getToken());
 
@@ -32,6 +33,7 @@ public class InMemorySessionRepository implements Repository {
         userSession.username.equals(userSessionDTO.username);
 
     this.userSessionList.removeIf(isSameUsername);
+
     this.userSessionList.add(userSessionDTO);
   }
 }

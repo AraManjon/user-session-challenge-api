@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * this endpoint is needed to add a session id to a specific username
- *
- * @param userSessionRequest
- * @return userSessionResponse
  */
 
 @RestController
@@ -33,6 +30,12 @@ public class UserSessionController {
   @Autowired
   Repository inMemorySessionRepository;
 
+  /**
+   * @param userSessionRequest username to create userSession
+   * @return UserSessionResponse
+   * @throws NotAllowedEmptyUsername "Username cannot be empty"
+   * @throws RuntimeException        "Service unavailable"
+   */
   @PostMapping(value = "/session")
   public ResponseEntity<Object> addSession(@RequestBody UserSessionRequest userSessionRequest) {
 

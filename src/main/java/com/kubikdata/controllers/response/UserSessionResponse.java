@@ -2,7 +2,10 @@ package com.kubikdata.controllers.response;
 
 import java.util.Objects;
 
-public class SessionResponse {
+/**
+ * this class contains token generated
+ */
+public class UserSessionResponse {
 
   private String token;
 
@@ -18,7 +21,7 @@ public class SessionResponse {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    SessionResponse that = (SessionResponse) o;
+    UserSessionResponse that = (UserSessionResponse) o;
     return Objects.equals(token, that.token);
   }
 

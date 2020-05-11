@@ -1,8 +1,8 @@
 package com.kubikdata.controllers;
 
-import com.kubikdata.controllers.response.UserResponse;
-import com.kubikdata.domain.exceptions.SessionException;
-import com.kubikdata.domain.exceptions.SessionNotFound;
+import com.kubikdata.controllers.response.UserDataResponse;
+import com.kubikdata.domain.exceptions.UserSessionException;
+import com.kubikdata.domain.exceptions.UserSessionNotFound;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.UserDataService;
 import com.kubikdata.domain.valueobjects.Username;
@@ -13,35 +13,38 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * this class is used to return data info based on its session token,
- * choose one of the endpoints to return data info
- *
- * @param username
- * @param token
- * @return userResponse
+ * this class is used to return data info based on its user session token
  */
 
 @RestController
 public class UserDataController {
 
   @Autowired
-  Repository inMemorySessionRepository;
+  Repository inMemoryUserSessionRepository;
 
+  /**
+   * @param username needed to find userSession
+   * @param token    needed to find userSession
+   * @return UserDataResponse
+   * @throws UserSessionNotFound  "Session not found"
+   * @throws UserSessionException "Token not valid"
+   * @throws RuntimeException     "Service unavailable"
+   */
   @GetMapping(value = "/info/{username}/{token}")
   public ResponseEntity<Object> userInfoGet(@PathVariable String username, @PathVariable String token) {
 
     try {
-      UserDataService userDataService = new UserDataService(inMemorySessionRepository);
+      UserDataService userDataService = new UserDataService(inMemoryUserSessionRepository);
 
-      UserResponse userResponse = userDataService.findUser(new Username(username), new Token(token));
-      return new ResponseEntity<>(userResponse, HttpStatus.OK);
-    } catch (SessionNotFound exception) {
+      UserDataResponse userDataResponse = userDataService.findUser(new Username(username), new Token(token));
+      return new ResponseEntity<>(userDataResponse, HttpStatus.OK);
+    } catch (UserSessionNotFound exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.METHOD_NOT_ALLOWED);
-    } catch (SessionException exception) {
+    } catch (UserSessionException exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-    }catch (Exception exception) {
+    } catch (RuntimeException exception) {
 
       return new ResponseEntity<>("Service unavailable", HttpStatus.SERVICE_UNAVAILABLE);
     }

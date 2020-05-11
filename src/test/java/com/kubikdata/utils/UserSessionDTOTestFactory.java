@@ -1,6 +1,6 @@
 package com.kubikdata.utils;
 
-import com.kubikdata.domain.entities.DTO;
+import com.kubikdata.domain.dto.DTO;
 
 import java.util.Date;
 

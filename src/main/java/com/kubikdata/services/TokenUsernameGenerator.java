@@ -1,5 +1,6 @@
 package com.kubikdata.services;
 
+import com.kubikdata.domain.infrastructure.TokenGenerator;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

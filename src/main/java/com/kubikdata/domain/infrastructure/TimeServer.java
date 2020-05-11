@@ -1,4 +1,4 @@
-package com.kubikdata.services;
+package com.kubikdata.domain.infrastructure;
 
 import java.util.Date;
 

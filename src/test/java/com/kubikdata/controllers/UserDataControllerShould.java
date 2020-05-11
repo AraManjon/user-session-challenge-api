@@ -1,10 +1,10 @@
 package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.response.UserResponse;
-import com.kubikdata.domain.entities.DTO;
+import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
-import com.kubikdata.infrastructure.Repository;
+import com.kubikdata.domain.infrastructure.Repository;
 import com.kubikdata.infrastructure.InMemorySessionRepository;
 import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Assert;
@@ -103,7 +103,7 @@ public class UserDataControllerShould {
 
     String username = "username";
     String token = TokenTestFactory.createBy(username);
-    when(sessionInMemoryRepository.findUser(new Username(username), new Token(token))).thenReturn(null);
+    when(sessionInMemoryRepository.find(new Username(username), new Token(token))).thenReturn(null);
     ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
 
     Assert.assertEquals(HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());

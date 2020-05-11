@@ -1,13 +1,13 @@
 package com.kubikdata.domain;
 
 import com.kubikdata.controllers.response.SessionResponse;
-import com.kubikdata.domain.entities.DTO;
+import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.entities.UserSession;
 import com.kubikdata.domain.valueobjects.Username;
-import com.kubikdata.infrastructure.Repository;
-import com.kubikdata.services.TimeServer;
-import com.kubikdata.services.TokenGenerator;
+import com.kubikdata.domain.infrastructure.Repository;
+import com.kubikdata.domain.infrastructure.TimeServer;
+import com.kubikdata.domain.infrastructure.TokenGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

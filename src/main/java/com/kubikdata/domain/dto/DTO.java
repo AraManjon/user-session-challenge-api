@@ -1,4 +1,4 @@
-package com.kubikdata.domain.entities;
+package com.kubikdata.domain.dto;
 
 import java.util.Date;
 import java.util.Objects;

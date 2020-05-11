@@ -1,5 +1,6 @@
 package com.kubikdata.domain.entities;
 
+import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 

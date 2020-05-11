@@ -2,10 +2,10 @@ package com.kubikdata.unit;
 
 import com.kubikdata.controllers.response.SessionResponse;
 import com.kubikdata.domain.UserSessionService;
-import com.kubikdata.domain.entities.DTO;
+import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Username;
-import com.kubikdata.infrastructure.Repository;
-import com.kubikdata.services.TimeServer;
+import com.kubikdata.domain.infrastructure.Repository;
+import com.kubikdata.domain.infrastructure.TimeServer;
 import com.kubikdata.services.TokenUsernameGenerator;
 import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Assert;

@@ -6,7 +6,7 @@ import com.kubikdata.domain.exceptions.SessionNotFound;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.UserDataService;
 import com.kubikdata.domain.valueobjects.Username;
-import com.kubikdata.infrastructure.Repository;
+import com.kubikdata.domain.infrastructure.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

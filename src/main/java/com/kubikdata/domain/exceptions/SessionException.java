@@ -1,6 +1,7 @@
-package com.kubikdata.domain;
+package com.kubikdata.domain.exceptions;
 
-public class SessionException extends Throwable {
-  public SessionException(String token_can_not_be_empty) {
+public class SessionException extends RuntimeException {
+  public SessionException(String message) {
+    super(message);
   }
 }

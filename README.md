@@ -20,7 +20,7 @@ Api is a spring boot project written in Java 8.
 
 The project has been build in two parts and each has an end-point and responsability. 
 
-From an outside-in TDD approach, the first step was the controller implementation and it was growing doing unit test in all work flow. 
+From an outside-in TDD approach, the first step was the controller implementation and all project was growing doing unit test in all work flow. 
 Finally, it's realized a test end-to-end for each end-point. And to test all project, is included an acceptance test with all requirements.
 
 #### :rocket: User Session Service
@@ -61,8 +61,8 @@ Finally, it's realized a test end-to-end for each end-point. And to test all pro
 
 :x: Token and username should exist.
 
-**Create session**
+**Retrieve User Data**
  
 > GET/info/{username}/{token}
 
-Notes: Is created an InMemoryRepository to persist user sessions.
+**Notes:** Is created an InMemoryRepository to persist user sessions.

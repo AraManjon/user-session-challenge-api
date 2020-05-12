@@ -9,7 +9,7 @@ public class Username {
   private final String username;
 
   public Username(String username) {
-    if(username.isEmpty()) throw new NotAllowedEmptyUsername("Username can not be empty");
+    if(username.isEmpty()) throw new NotAllowedEmptyUsername("Username cannot be empty");
     this.username = username;
   }
 

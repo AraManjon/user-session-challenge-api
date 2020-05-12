@@ -42,10 +42,10 @@ public class UserSessionControllerEndToEndShould {
   private TimeServer timeDataServer;
 
   @Autowired
-  private Repository sessionInMemoryRepository;
+  private Repository inMemoryUserSessionRepository;
 
   @Test
-  public void create_a_token_when_add_a_session_correctly() throws Exception {
+  public void create_a_token_when_add_a_user_session_correctly() throws Exception {
 
     String username = new Random().toString();
     UserSessionRequest userSessionRequest = new UserSessionRequest();
@@ -61,5 +61,22 @@ public class UserSessionControllerEndToEndShould {
 
     Assertions.assertNotNull(resultAsString);
     Assertions.assertEquals(username, generator.decode(userSessionResponse.getToken()).getSubject());
+  }
+
+  @Test
+  public void throw_an_error_when_username_is_empty() throws Exception {
+
+    String username = "";
+    UserSessionRequest userSessionRequest = new UserSessionRequest();
+    userSessionRequest.setUsername(username);
+    String jsonRequest = new ObjectMapper().writeValueAsString(userSessionRequest);
+
+    MvcResult result = this.mockMvc.perform(post("/session").contentType(MediaType.APPLICATION_JSON)
+        .content(jsonRequest)).andDo(print()).andExpect(status().isBadRequest())
+        .andReturn();
+    String resultAsString = result.getResponse().getContentAsString();
+
+    Assertions.assertNotNull(resultAsString);
+    Assertions.assertEquals("Username cannot be empty", resultAsString);
   }
 }

@@ -85,4 +85,20 @@ public class UserDataControllerEndToEndShould {
     Assertions.assertNotNull(resultAsString);
     Assertions.assertEquals(userDataResponseExpected, userDataResponse);
   }
+
+
+  @Test
+  public void throw_an_error_if_user_session_is_not_found() throws Exception {
+
+    String username = new Random().toString();
+    String token = TokenTestFactory.createBy(username);
+
+    MvcResult result = this.mockMvc.perform(get("/info/"+username+"/"+token))
+        .andDo(print()).andExpect(status().isMethodNotAllowed())
+        .andReturn();
+    String resultAsString = result.getResponse().getContentAsString();
+
+    Assertions.assertNotNull(resultAsString);
+    Assertions.assertEquals("Session not found", resultAsString);
+  }
 }

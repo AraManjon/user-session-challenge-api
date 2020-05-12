@@ -8,6 +8,7 @@ import com.kubikdata.domain.infrastructure.Repository;
 import com.kubikdata.domain.infrastructure.TimeServer;
 import com.kubikdata.services.TokenUsernameGenerator;
 import com.kubikdata.utils.TokenTestFactory;
+import com.kubikdata.utils.UserSessionDTOTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
+import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -56,5 +58,27 @@ public class UserSessionServiceShould {
 
     Assert.assertEquals(userSessionResponse, userSessionService.addSession(new Username(username)));
     verify(sessionInMemoryRepository).add(userSessionDTO);
+  }
+
+  @Test
+  public void update_user_session_when_exist() {
+
+    UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, timeServer, sessionInMemoryRepository);
+    String username = "username";
+    String token = TokenTestFactory.createBy(username);
+    Optional<DTO.UserSession> userSessionDTO = Optional.of(UserSessionDTOTestFactory.create(username, token));
+    Date date = new Date();
+    DTO.UserSession userSessionUpdatedDTO = new DTO.UserSession();
+    userSessionUpdatedDTO.username = username;
+    userSessionUpdatedDTO.token = token;
+    userSessionUpdatedDTO.date = new Date();
+    UserSessionResponse userSessionResponse = new UserSessionResponse();
+    userSessionResponse.setToken(token);
+    when(sessionInMemoryRepository.find(new Username(username))).thenReturn(userSessionDTO);
+    when(tokenUsernameGenerator.code(username)).thenReturn(token);
+    when(timeServer.generate()).thenReturn(date);
+
+    Assert.assertEquals(userSessionResponse, userSessionService.addSession(new Username(username)));
+    verify(sessionInMemoryRepository).add(userSessionUpdatedDTO);
   }
 }

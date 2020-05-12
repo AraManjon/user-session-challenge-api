@@ -10,4 +10,6 @@ public interface Repository {
   Optional<DTO.UserSession> find(Username username);
 
   void add(DTO.UserSession userSession);
+
+  void remove(Username username);
 }

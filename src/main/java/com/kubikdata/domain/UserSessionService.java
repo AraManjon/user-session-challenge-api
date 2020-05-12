@@ -11,6 +11,7 @@ import com.kubikdata.domain.infrastructure.TokenGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * this class create userSession and add to repository
@@ -30,20 +31,30 @@ public class UserSessionService {
 
   public UserSessionResponse addSession(Username username) {
 
+    removeIfUserSessionExist(username);
+
     UserSession userSession = createUserSession(username);
 
     DTO.UserSession userSessionDTO = userSession.createDTO();
     repository.add(userSessionDTO);
 
-    UserSessionResponse userSessionResponse = new UserSessionResponse();
-    userSessionResponse.setToken(userSessionDTO.token);
+    return createUserSessionResponse(userSessionDTO);
+  }
 
-    return userSessionResponse;
+  private void removeIfUserSessionExist(Username username) {
+    Optional<DTO.UserSession> userSessionFound = repository.find(username);
+    if(userSessionFound.isPresent()) repository.remove(username);
   }
 
   private UserSession createUserSession(Username username) {
     Date date = timeServer.generate();
     Token token = new Token(tokenGenerator.code(username.getUsername()));
     return new UserSession(username, token, date);
+  }
+
+  private UserSessionResponse createUserSessionResponse(DTO.UserSession userSessionDTO) {
+    UserSessionResponse userSessionResponse = new UserSessionResponse();
+    userSessionResponse.setToken(userSessionDTO.token);
+    return userSessionResponse;
   }
 }

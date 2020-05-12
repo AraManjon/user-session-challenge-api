@@ -25,11 +25,13 @@ public class InMemoryUserSessionRepository implements Repository {
 
   public void add(DTO.UserSession userSessionDTO) {
 
-    Predicate<DTO.UserSession> isSameUsername = userSession ->
-        userSession.username.equals(userSessionDTO.username);
-
-    this.userSessionList.removeIf(isSameUsername);
-
     this.userSessionList.add(userSessionDTO);
+  }
+
+  @Override
+  public void remove(Username username) {
+
+    this.userSessionList.removeIf(userSession ->
+        userSession.username.equals(username.getUsername()));
   }
 }

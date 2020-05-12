@@ -51,19 +51,16 @@ public class InMemorySessionShould {
   }
 
   @Test
-  public void update_userSession_when_username_exist_from_a_list_correctly(){
+  public void remove_userSession_from_a_list_correctly(){
 
     String username = "username";
     String token = TokenTestFactory.createBy(username);
-    DTO.UserSession userSession1 = UserSessionDTOTestFactory.create(username, token);
-    String token2 = TokenTestFactory.createBy(username);
-    DTO.UserSession userSession2 = UserSessionDTOTestFactory.create(username, token2);
-    Optional<DTO.UserSession> userSessionExpected = Optional.of(userSession2);
+    DTO.UserSession userSession = UserSessionDTOTestFactory.create(username, token);
 
-    inMemoryUserSessionRepository.add(userSession1);
-    inMemoryUserSessionRepository.add(userSession2);
+    inMemoryUserSessionRepository.add(userSession);
+    inMemoryUserSessionRepository.remove(new Username(username));
 
-    Assert.assertEquals(userSessionExpected,
-        inMemoryUserSessionRepository.find(new Username(username)));
+    Assert.assertEquals(Optional.empty(), inMemoryUserSessionRepository.find(new Username(username)));
+
   }
 }

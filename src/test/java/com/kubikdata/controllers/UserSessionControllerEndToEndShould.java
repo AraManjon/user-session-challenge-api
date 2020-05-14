@@ -60,7 +60,7 @@ public class UserSessionControllerEndToEndShould {
     UserSessionResponse userSessionResponse = objectMapper.readValue(resultAsString, UserSessionResponse.class);
 
     Assertions.assertNotNull(resultAsString);
-    Assertions.assertEquals(username, generator.decode(userSessionResponse.getToken()).getSubject());
+    Assertions.assertTrue(generator.decode(userSessionResponse.getToken(), username));
   }
 
   @Test

@@ -13,8 +13,7 @@ public class TokenUsernameGeneratorShould {
     TokenUsernameGenerator tokenUsernameGenerator = new TokenUsernameGenerator();
 
     String token = tokenUsernameGenerator.code(username);
-    String decodeToken = tokenUsernameGenerator.decode(token).getSubject();
 
-    Assert.assertEquals(username, decodeToken);
+    Assert.assertTrue(tokenUsernameGenerator.decode(token, username));
   }
 }

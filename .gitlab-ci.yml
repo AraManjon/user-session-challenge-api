@@ -8,7 +8,8 @@ build challenge:
   image: maven:3-jdk-8
   stage: build
   tags:
-    - docker maven sql
+    - docker
+    - maven sql
   script: "mvn package -B"
   artifacts:
     paths:
@@ -18,5 +19,6 @@ unit_test:
   image: maven:3-jdk-8
   stage: test
   tags:
-    - docker maven sql
+    - docker
+    - maven sql
   script: "mvn clean test"

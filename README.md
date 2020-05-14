@@ -9,7 +9,9 @@ Api is a spring boot project written in Java 8.
 
 > git clone git@gitlab.com:Ara_Manjon/user-session-challenge.git
 >
-> cd user-session-challenge/src/main
+> in the project directory
+>
+> cd src/main
 >
 > run Application
 >

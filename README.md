@@ -45,7 +45,7 @@ Notes: **Add this information to a specific user**: create User Session where is
 
 ##### Constraints:
 
-:x: Username cannot be empty.
+:x: Username should has a valid format.
 
 **Create User Session**
  
@@ -67,6 +67,8 @@ Notes: **Add this information to a specific user**: create User Session where is
 ##### Constraints:
 
 :x: Token should have a correct format. 
+
+:x: Username should have a correct format. 
 
 :x: Valid token and username.
 

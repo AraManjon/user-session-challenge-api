@@ -47,7 +47,7 @@ public class UserSessionControllerEndToEndShould {
   @Test
   public void create_a_token_when_add_a_user_session_correctly() throws Exception {
 
-    String username = new Random().toString();
+    String username = "username";
     UserSessionRequest userSessionRequest = new UserSessionRequest();
     userSessionRequest.setUsername(username);
     TokenUsernameGenerator generator = new TokenUsernameGenerator();
@@ -78,5 +78,22 @@ public class UserSessionControllerEndToEndShould {
 
     Assertions.assertNotNull(resultAsString);
     Assertions.assertEquals("Username cannot be empty", resultAsString);
+  }
+
+  @Test
+  public void throw_an_error_when_username_is_not_valid() throws Exception {
+
+    String username = "_+@";
+    UserSessionRequest userSessionRequest = new UserSessionRequest();
+    userSessionRequest.setUsername(username);
+    String jsonRequest = new ObjectMapper().writeValueAsString(userSessionRequest);
+
+    MvcResult result = this.mockMvc.perform(post("/session").contentType(MediaType.APPLICATION_JSON)
+        .content(jsonRequest)).andDo(print()).andExpect(status().isBadRequest())
+        .andReturn();
+    String resultAsString = result.getResponse().getContentAsString();
+
+    Assertions.assertNotNull(resultAsString);
+    Assertions.assertEquals("Username not valid", resultAsString);
   }
 }

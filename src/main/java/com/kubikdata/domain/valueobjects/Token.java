@@ -12,20 +12,19 @@ public class Token {
 
   public Token(String token) {
 
-    if (token.isEmpty()) throw new RuntimeException();
+    //if (token.isEmpty()) throw new RuntimeException();
 
     if (!validate(token)) throw new TokenIsNotValid("Token not valid");
 
     this.token = token;
   }
 
-  private boolean validate(String token) {
-
-    Matcher matcher = VALID_TOKEN_REGEX.matcher(token);
-    return matcher.find();
-  }
-
   public String getToken() {
     return token;
+  }
+
+  private boolean validate(String token) {
+    Matcher matcher = VALID_TOKEN_REGEX.matcher(token);
+    return matcher.find();
   }
 }

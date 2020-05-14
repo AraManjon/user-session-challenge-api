@@ -97,16 +97,4 @@ public class UserDataControllerShould {
     Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
     Assert.assertEquals("Service unavailable", response.getBody());
   }
-
-  @Test
-  public void throws_an_error_when_token_is_empty() {
-
-    String username = "username";
-    String token = "";
-
-    ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
-
-    Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
-    Assert.assertEquals("Service unavailable", response.getBody());
-  }
 }

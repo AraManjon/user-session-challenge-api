@@ -70,7 +70,7 @@ public class UserDataControllerEndToEndShould {
   @Test
   public void find_user_data_correctly() throws Exception {
 
-    String username = new Random().toString();
+    String username = "username";
     Date date = new Date();
     String token = TokenTestFactory.createBy(username);
     createDummyRepository(username, token, date);
@@ -90,7 +90,7 @@ public class UserDataControllerEndToEndShould {
   @Test
   public void throw_an_error_if_user_session_is_not_found() throws Exception {
 
-    String username = new Random().toString();
+    String username = "usernameRandom";
     String token = TokenTestFactory.createBy(username);
 
     MvcResult result = this.mockMvc.perform(get("/info/"+username+"/"+token))

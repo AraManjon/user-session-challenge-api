@@ -1,7 +1,7 @@
 package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.request.UserSessionRequest;
-import com.kubikdata.domain.exceptions.NotAllowedEmptyUsername;
+import com.kubikdata.domain.exceptions.UsernameIsNotValid;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.domain.infrastructure.Repository;
 import com.kubikdata.domain.infrastructure.TimeServer;
@@ -35,7 +35,7 @@ public class UserSessionController {
   /**
    * @param userSessionRequest username to create userSession
    * @return UserSessionResponse
-   * @throws NotAllowedEmptyUsername "Username cannot be empty"
+   * @throws UsernameIsNotValid "Username cannot be empty"
    * @throws RuntimeException        "Service unavailable"
    */
   @PostMapping(value = "/session")
@@ -47,7 +47,7 @@ public class UserSessionController {
       Username username = new Username(userSessionRequest.getUsername());
 
       return new ResponseEntity<>(userSessionService.addSession(username), HttpStatus.OK);
-    } catch (NotAllowedEmptyUsername exception) {
+    } catch (UsernameIsNotValid exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     } catch (Exception exception) {

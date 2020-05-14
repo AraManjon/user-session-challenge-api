@@ -1,9 +1,9 @@
-# User Session Challenge
+# User Session Challenge Api
 
-User Session Challenge is a project created to solve a needed: know when a user has been logged in the system.
+User Session Challenge Api is a project created to solve a needed: know when a user has been logged in the system.
 The solution has been implement a User Session Generator that works from a username given.
 
-Api is a spring boot project written in Java 8.
+Is a spring boot project written in Java 8.
 
 ### Installation
 

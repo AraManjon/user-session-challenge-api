@@ -87,14 +87,14 @@ public class UserDataControllerShould {
   }
 
   @Test
-  public void throws_an_error_when_username_is_empty() {
+  public void throws_an_error_when_username_is_not_valid() {
 
-    String username = "";
+    String username = "_+@";
     String token = TokenTestFactory.createBy(username);
 
     ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
 
-    Assert.assertEquals(HttpStatus.SERVICE_UNAVAILABLE, response.getStatusCode());
-    Assert.assertEquals("Service unavailable", response.getBody());
+    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    Assert.assertEquals("Username not valid", response.getBody());
   }
 }

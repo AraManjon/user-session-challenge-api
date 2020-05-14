@@ -86,7 +86,6 @@ public class UserDataControllerEndToEndShould {
     Assertions.assertEquals(userDataResponseExpected, userDataResponse);
   }
 
-
   @Test
   public void throw_an_error_if_user_session_is_not_found() throws Exception {
 
@@ -100,5 +99,35 @@ public class UserDataControllerEndToEndShould {
 
     Assertions.assertNotNull(resultAsString);
     Assertions.assertEquals("Session not found", resultAsString);
+  }
+
+  @Test
+  public void throw_an_error_if_username_is_not_valid() throws Exception {
+
+    String username = "_+@";
+    String token = TokenTestFactory.createBy(username);
+
+    MvcResult result = this.mockMvc.perform(get("/info/"+username+"/"+token))
+        .andDo(print()).andExpect(status().isBadRequest())
+        .andReturn();
+    String resultAsString = result.getResponse().getContentAsString();
+
+    Assertions.assertNotNull(resultAsString);
+    Assertions.assertEquals("Username not valid", resultAsString);
+  }
+
+  @Test
+  public void throw_an_error_if_token_is_not_valid() throws Exception {
+
+    String username = "username";
+    String token = "token";
+
+    MvcResult result = this.mockMvc.perform(get("/info/"+username+"/"+token))
+        .andDo(print()).andExpect(status().isBadRequest())
+        .andReturn();
+    String resultAsString = result.getResponse().getContentAsString();
+
+    Assertions.assertNotNull(resultAsString);
+    Assertions.assertEquals("Token not valid", resultAsString);
   }
 }

@@ -2,6 +2,7 @@ package com.kubikdata.controllers;
 
 import com.kubikdata.controllers.response.UserDataResponse;
 import com.kubikdata.domain.exceptions.TokenIsNotValid;
+import com.kubikdata.domain.exceptions.UserSessionBadRequest;
 import com.kubikdata.domain.exceptions.UserSessionNotFound;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.UserDataService;
@@ -42,7 +43,7 @@ public class UserDataController {
     } catch (UserSessionNotFound exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.METHOD_NOT_ALLOWED);
-    } catch (TokenIsNotValid exception) {
+    } catch (UserSessionBadRequest exception) {
 
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     } catch (RuntimeException exception) {

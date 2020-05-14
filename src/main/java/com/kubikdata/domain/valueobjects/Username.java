@@ -12,7 +12,6 @@ public class Username {
   private final Pattern VALID_USERNAME_REGEX = Pattern.compile("^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$");
 
   public Username(String username) {
-    if(username.isEmpty()) throw new UsernameIsNotValid("Username cannot be empty");
     if(!validate(username)) throw new UsernameIsNotValid("Username not valid");
 
     this.username = username;

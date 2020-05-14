@@ -69,19 +69,6 @@ public class UserSessionControllerShould {
   }
 
   @Test
-  public void throws_an_error_when_username_is_empty() {
-
-    String username = "";
-    UserSessionRequest userSessionRequest = new UserSessionRequest();
-    userSessionRequest.setUsername(username);
-
-    ResponseEntity<Object> response = userSessionController.addSession(userSessionRequest);
-
-    Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-    Assert.assertEquals("Username cannot be empty", response.getBody());
-  }
-
-  @Test
   public void throws_an_error_when_username_is_not_valid() {
 
     String username = "_+@";

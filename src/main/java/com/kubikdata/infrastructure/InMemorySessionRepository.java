@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 @Component
-public class InMemoryUserSessionRepository implements Repository {
+public class InMemorySessionRepository implements Repository {
 
   private final List<DTO.UserSession> userSessionList = new ArrayList<>();
 

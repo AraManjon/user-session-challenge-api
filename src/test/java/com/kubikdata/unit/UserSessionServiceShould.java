@@ -33,7 +33,7 @@ public class UserSessionServiceShould {
   TimeServer timeServer;
 
   @Mock
-  Repository sessionInMemoryRepository;
+  Repository repository;
 
   @Before
   public void setup() {
@@ -43,7 +43,7 @@ public class UserSessionServiceShould {
   @Test
   public void create_a_token_correctly_when_add_user_session() {
 
-    UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, timeServer, sessionInMemoryRepository);
+    UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, timeServer, repository);
     String username = "username";
     String token = TokenTestFactory.createBy(username);
     Date date = new Date();
@@ -57,13 +57,13 @@ public class UserSessionServiceShould {
     when(timeServer.generate()).thenReturn(date);
 
     Assert.assertEquals(userSessionResponse, userSessionService.addSession(new Username(username)));
-    verify(sessionInMemoryRepository).add(userSessionDTO);
+    verify(repository).add(userSessionDTO);
   }
 
   @Test
   public void update_user_session_when_exist() {
 
-    UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, timeServer, sessionInMemoryRepository);
+    UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, timeServer, repository);
     String username = "username";
     String token = TokenTestFactory.createBy(username);
     Optional<DTO.UserSession> userSessionDTO = Optional.of(UserSessionDTOTestFactory.create(username, token));
@@ -74,11 +74,11 @@ public class UserSessionServiceShould {
     userSessionUpdatedDTO.date = new Date();
     UserSessionResponse userSessionResponse = new UserSessionResponse();
     userSessionResponse.setToken(token);
-    when(sessionInMemoryRepository.find(new Username(username))).thenReturn(userSessionDTO);
+    when(repository.find(new Username(username))).thenReturn(userSessionDTO);
     when(tokenUsernameGenerator.code(username)).thenReturn(token);
     when(timeServer.generate()).thenReturn(date);
 
     Assert.assertEquals(userSessionResponse, userSessionService.addSession(new Username(username)));
-    verify(sessionInMemoryRepository).add(userSessionUpdatedDTO);
+    verify(repository).add(userSessionUpdatedDTO);
   }
 }

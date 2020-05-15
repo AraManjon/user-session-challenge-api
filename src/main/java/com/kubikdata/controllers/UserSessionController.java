@@ -30,7 +30,7 @@ public class UserSessionController {
   TimeServer dateServer;
 
   @Autowired
-  Repository inMemorySessionRepository;
+  Repository repository;
 
   /**
    * @param userSessionRequest username to create userSession
@@ -43,7 +43,7 @@ public class UserSessionController {
 
     try {
 
-      UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, dateServer, inMemorySessionRepository);
+      UserSessionService userSessionService = new UserSessionService(tokenUsernameGenerator, dateServer, repository);
       Username username = new Username(userSessionRequest.getUsername());
 
       return new ResponseEntity<>(userSessionService.addSession(username), HttpStatus.OK);

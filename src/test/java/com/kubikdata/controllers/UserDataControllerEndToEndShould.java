@@ -42,7 +42,7 @@ public class UserDataControllerEndToEndShould {
   private ObjectMapper objectMapper;
 
   @Autowired
-  private Repository sessionInMemoryRepository;
+  private Repository repository;
 
   @MockBean
   private TokenGenerator tokenUsernameGenerator;

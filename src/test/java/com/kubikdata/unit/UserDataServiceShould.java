@@ -7,7 +7,7 @@ import com.kubikdata.domain.exceptions.UserSessionNotFound;
 import com.kubikdata.domain.valueobjects.Token;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.domain.infrastructure.Repository;
-import com.kubikdata.infrastructure.InMemoryUserSessionRepository;
+import com.kubikdata.infrastructure.InMemorySessionRepository;
 import com.kubikdata.utils.TokenTestFactory;
 import com.kubikdata.utils.UserSessionDTOTestFactory;
 import org.junit.Assert;
@@ -24,7 +24,7 @@ import java.util.Date;
 public class UserDataServiceShould {
 
   @Mock
-  Repository inMemoryUserSessionRepository;
+  Repository repository;
 
   @Before
   public void setup() {
@@ -32,8 +32,8 @@ public class UserDataServiceShould {
   }
 
   public void createDummyRepository(DTO.UserSession userSessionDTO){
-    inMemoryUserSessionRepository = new InMemoryUserSessionRepository();
-    inMemoryUserSessionRepository.add(userSessionDTO);
+    repository = new InMemorySessionRepository();
+    repository.add(userSessionDTO);
   }
 
   @Test
@@ -48,7 +48,7 @@ public class UserDataServiceShould {
     userSessionDTO.token = token;
     userSessionDTO.date = date;
     createDummyRepository(userSessionDTO);
-    UserDataService userDataService = new UserDataService(inMemoryUserSessionRepository);
+    UserDataService userDataService = new UserDataService(repository);
 
     Assert.assertEquals(userDataResponseExpected, userDataService.findUser(new Username(username), new Token(token)));
   }
@@ -59,7 +59,7 @@ public class UserDataServiceShould {
     String username = "notFoundUsername";
     String token = TokenTestFactory.createBy(username);
 
-    UserDataService userDataService = new UserDataService(inMemoryUserSessionRepository);
+    UserDataService userDataService = new UserDataService(repository);
 
     userDataService.findUser(new Username(username), new Token(token));
   }
@@ -73,7 +73,7 @@ public class UserDataServiceShould {
     DTO.UserSession userSessionDTO = UserSessionDTOTestFactory.create(username, token);
     createDummyRepository(userSessionDTO);
 
-    UserDataService userDataService = new UserDataService(inMemoryUserSessionRepository);
+    UserDataService userDataService = new UserDataService(repository);
 
     userDataService.findUser(new Username(username), new Token(tokenNotFound));
   }

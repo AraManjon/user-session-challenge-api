@@ -4,7 +4,7 @@ import com.kubikdata.controllers.response.UserDataResponse;
 import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Username;
 import com.kubikdata.domain.infrastructure.Repository;
-import com.kubikdata.infrastructure.InMemoryUserSessionRepository;
+import com.kubikdata.infrastructure.InMemorySessionRepository;
 import com.kubikdata.utils.TokenTestFactory;
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class UserDataControllerShould {
 
   @Mock
-  Repository sessionInMemoryRepository;
+  Repository repository;
 
   @InjectMocks
   private UserDataController userDataController;
@@ -37,9 +37,9 @@ public class UserDataControllerShould {
   }
 
   public void createDummyRepository(DTO.UserSession userSessionDTO) {
-    sessionInMemoryRepository = new InMemoryUserSessionRepository();
-    sessionInMemoryRepository.add(userSessionDTO);
-    userDataController.inMemoryUserSessionRepository = sessionInMemoryRepository;
+    repository = new InMemorySessionRepository();
+    repository.add(userSessionDTO);
+    userDataController.repository = repository;
   }
 
   @Test
@@ -79,7 +79,7 @@ public class UserDataControllerShould {
 
     String username = "username";
     String token = TokenTestFactory.createBy(username);
-    when(sessionInMemoryRepository.find(new Username(username))).thenReturn(Optional.empty());
+    when(repository.find(new Username(username))).thenReturn(Optional.empty());
     ResponseEntity<Object> response = userDataController.userInfoGet(username, token);
 
     Assert.assertEquals(HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());

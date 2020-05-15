@@ -33,7 +33,7 @@ public class UserSessionControllerShould {
   private TimeServer timeDataServer;
 
   @Mock
-  private Repository sessionInMemoryRepository;
+  private Repository repository;
 
   @InjectMocks
   private UserSessionController userSessionController;
@@ -62,7 +62,7 @@ public class UserSessionControllerShould {
 
     ResponseEntity<Object> response = userSessionController.addSession(userSessionRequest);
 
-    verify(sessionInMemoryRepository).add(userSessionDTO);
+    verify(repository).add(userSessionDTO);
     Assert.assertNotNull(response);
     Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     Assert.assertEquals(userSessionResponseExpected, response.getBody());

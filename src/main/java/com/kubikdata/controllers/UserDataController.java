@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserDataController {
 
   @Autowired
-  Repository inMemoryUserSessionRepository;
+  Repository repository;
 
   /**
    * @param username needed to find userSession
@@ -36,7 +36,7 @@ public class UserDataController {
   public ResponseEntity<Object> userInfoGet(@PathVariable String username, @PathVariable String token) {
 
     try {
-      UserDataService userDataService = new UserDataService(inMemoryUserSessionRepository);
+      UserDataService userDataService = new UserDataService(repository);
 
       UserDataResponse userDataResponse = userDataService.findUser(new Username(username), new Token(token));
       return new ResponseEntity<>(userDataResponse, HttpStatus.OK);

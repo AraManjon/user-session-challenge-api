@@ -1,8 +1,7 @@
-package com.kubikdata.unit;
+package com.kubikdata.infrastructure;
 
 import com.kubikdata.domain.dto.DTO;
 import com.kubikdata.domain.valueobjects.Username;
-import com.kubikdata.infrastructure.InMemoryUserSessionRepository;
 import com.kubikdata.utils.TokenTestFactory;
 import com.kubikdata.utils.UserSessionDTOTestFactory;
 import org.junit.Assert;
@@ -12,7 +11,7 @@ import java.util.Optional;
 
 public class InMemorySessionShould {
 
-  InMemoryUserSessionRepository inMemoryUserSessionRepository = new InMemoryUserSessionRepository();
+  InMemorySessionRepository inMemorySessionRepository = new InMemorySessionRepository();
 
   @Test
   public void add_and_find_userSession_correctly(){
@@ -22,10 +21,10 @@ public class InMemorySessionShould {
     DTO.UserSession userSessionDTO =  UserSessionDTOTestFactory.create(username, token);
     Optional<DTO.UserSession> userSessionExpected = Optional.of(userSessionDTO);
 
-    inMemoryUserSessionRepository.add(userSessionDTO);
+    inMemorySessionRepository.add(userSessionDTO);
 
     Assert.assertEquals(userSessionExpected,
-        inMemoryUserSessionRepository.find(new Username(username)));
+        inMemorySessionRepository.find(new Username(username)));
   }
 
   @Test
@@ -42,12 +41,12 @@ public class InMemorySessionShould {
     DTO.UserSession userSession3 = UserSessionDTOTestFactory.create(username3, token3);
     Optional<DTO.UserSession> userSessionExpected = Optional.of(userSession1);
 
-    inMemoryUserSessionRepository.add(userSession1);
-    inMemoryUserSessionRepository.add(userSession2);
-    inMemoryUserSessionRepository.add(userSession3);
+    inMemorySessionRepository.add(userSession1);
+    inMemorySessionRepository.add(userSession2);
+    inMemorySessionRepository.add(userSession3);
 
     Assert.assertEquals(userSessionExpected,
-        inMemoryUserSessionRepository.find(new Username(username)));
+        inMemorySessionRepository.find(new Username(username)));
   }
 
   @Test
@@ -57,10 +56,10 @@ public class InMemorySessionShould {
     String token = TokenTestFactory.createBy(username);
     DTO.UserSession userSession = UserSessionDTOTestFactory.create(username, token);
 
-    inMemoryUserSessionRepository.add(userSession);
-    inMemoryUserSessionRepository.remove(new Username(username));
+    inMemorySessionRepository.add(userSession);
+    inMemorySessionRepository.remove(new Username(username));
 
-    Assert.assertEquals(Optional.empty(), inMemoryUserSessionRepository.find(new Username(username)));
+    Assert.assertEquals(Optional.empty(), inMemorySessionRepository.find(new Username(username)));
 
   }
 }

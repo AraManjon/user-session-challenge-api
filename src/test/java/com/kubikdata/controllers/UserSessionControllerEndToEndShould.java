@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Random;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -42,7 +41,7 @@ public class UserSessionControllerEndToEndShould {
   private TimeServer timeDataServer;
 
   @Autowired
-  private Repository inMemoryUserSessionRepository;
+  private Repository repository;
 
   @Test
   public void create_a_token_when_add_a_user_session_correctly() throws Exception {

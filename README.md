@@ -7,7 +7,7 @@ Api is a spring boot project written in Java 8.
 
 ### Installation
 
-> git clone git@gitlab.com:Ara_Manjon/user-session-generator.git
+> git clone git@gitlab.com:Ara_Manjon/user-session-challenge.git
 >
 > in the project directory
 >
